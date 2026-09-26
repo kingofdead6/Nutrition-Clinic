@@ -1,0 +1,29 @@
+# Render Blueprint: one web service that serves the API and the built client (same origin).
+# Render → New → Blueprint picks this up; for an existing service, copy these settings.
+services:
+  - type: web
+    name: nutrition-clinic
+    runtime: node
+    plan: free
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: NODE_ENV
+        value: production
+      # Render routes traffic to 0.0.0.0:$PORT (PORT is set by Render).
+      - key: HOST
+        value: 0.0.0.0
+      - key: CLIENT_DIST_DIR
+        value: ../client/dist
+      - key: TRUST_PROXY
+        value: true
+      - key: COOKIE_SECURE
+        value: true
+      - key: JWT_SECRET
+        generateValue: true
+      # Set in the dashboard (MongoDB Atlas connection string).
+      - key: MONGO_URI
+        sync: false

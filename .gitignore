@@ -5,7 +5,7 @@ coverage/
 .env
 .env.local
 # runtime data (uploads, backups, local DB files)
-data/
+/data/
 apps/server/data/
 .DS_Store
 Thumbs.db

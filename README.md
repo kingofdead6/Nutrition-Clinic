@@ -119,6 +119,26 @@ app these map to Electron's `webContents.print()` / `printToPDF()`.
 Add `?autoprint=1` to open the print dialog once the document has loaded (the app's print
 buttons do this in a new tab).
 
+## Deploying (Render)
+
+One web service serves the API and the built client from the same origin. The settings are
+in [render.yaml](render.yaml). Use Render → New → Blueprint, or copy them into an existing service:
+
+| Setting           | Value                                                                                                                                                                 |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Build command     | `npm ci && npm run build`                                                                                                                                             |
+| Start command     | `npm start`                                                                                                                                                           |
+| Health check path | `/api/health`                                                                                                                                                         |
+| Environment       | `NODE_ENV=production`, `HOST=0.0.0.0`, `CLIENT_DIST_DIR=../client/dist`, `TRUST_PROXY=true`, `COOKIE_SECURE=true`, `JWT_SECRET` (≥ 32 random characters), `MONGO_URI` |
+
+- `.npmrc` sets `include=dev`. The build tools (tsup, TypeScript, Vite) are devDependencies,
+  and npm would otherwise skip them under `NODE_ENV=production`.
+- `HOST` must be `0.0.0.0`. The default `127.0.0.1` is only reachable from inside the machine.
+- Render's disk is temporary. Uploaded photos, the logo and server-side backups (`DATA_DIR`)
+  are lost on every deploy unless you attach a persistent disk and point `DATA_DIR` at it.
+  Download backups from the Backup page.
+- In Atlas → Network Access, allow Render's outbound IPs (or `0.0.0.0/0`).
+
 ## Architecture
 
 ```
