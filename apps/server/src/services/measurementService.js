@@ -1,4 +1,4 @@
-import { buildProgress, deriveMeasurement, todayIn } from '@clinic/shared';
+import { buildProgress, deriveMeasurement, todayIn } from '#shared';
 import { fieldError, notFound } from '../lib/errors.js';
 
 /**
@@ -34,7 +34,7 @@ export function createMeasurementService({ repositories, now }, { settings, pati
 
     /**
      * @param {string} patientId
-     * @param {import('@clinic/shared').MeasurementCreateInput} input
+     * @param {import('#shared').MeasurementCreateInput} input
      */
     async create(patientId, input) {
       await patients.get(patientId);
@@ -48,7 +48,7 @@ export function createMeasurementService({ repositories, now }, { settings, pati
     /**
      * @param {string} patientId
      * @param {string} measurementId
-     * @param {import('@clinic/shared').MeasurementUpdateInput} patch
+     * @param {import('#shared').MeasurementUpdateInput} patch
      */
     async update(patientId, measurementId, patch) {
       const current = await getOwned(patientId, measurementId);

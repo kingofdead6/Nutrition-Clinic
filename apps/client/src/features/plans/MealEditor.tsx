@@ -1,6 +1,6 @@
 import { ArrowDown, ArrowUp, Trash2, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { MEAL_TYPES, type MealType } from '@clinic/shared';
+import { MEAL_TYPES, type MealType } from '@shared';
 import { Button } from '../../components/ui/Button';
 import { Input, Select } from '../../components/ui/Input';
 import { FoodPicker } from './FoodPicker';

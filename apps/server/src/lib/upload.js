@@ -1,5 +1,5 @@
 import multer from 'multer';
-import { UPLOAD_IMAGE_MIME_TYPES, UPLOAD_MAX_BYTES } from '@clinic/shared';
+import { UPLOAD_IMAGE_MIME_TYPES, UPLOAD_MAX_BYTES } from '#shared';
 import { AppError } from './errors.js';
 
 /**

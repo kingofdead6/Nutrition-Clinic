@@ -11,7 +11,7 @@ To implement it:
 2. Store nested arrays that belong to one parent as JSON columns: diet plan `days`, patient
    `allergies` / `medications` / `chronicConditions`, prescription lines, settings `workingHours`.
 3. Store the storage-only `searchKey` column (built with `buildSearchKey` from
-   `@clinic/shared`) and search with `LIKE '%' || ? || '%'`, as the Mongo driver does
+   `#shared`) and search with `LIKE '%' || ? || '%'`, as the Mongo driver does
    with a regex.
 4. Enforce "one active plan per patient" with a partial unique index
    (`CREATE UNIQUE INDEX one_active_plan ON diet_plans(patient_id) WHERE is_active = 1`)

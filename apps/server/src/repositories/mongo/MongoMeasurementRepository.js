@@ -1,7 +1,7 @@
 import { MongoCrudRepository } from './MongoCrudRepository.js';
 
 /**
- * @extends {MongoCrudRepository<import('@clinic/shared').Measurement>}
+ * @extends {MongoCrudRepository<import('#shared').Measurement>}
  * @implements {import('../interfaces/MeasurementRepository.js').MeasurementRepository}
  */
 export class MongoMeasurementRepository extends MongoCrudRepository {

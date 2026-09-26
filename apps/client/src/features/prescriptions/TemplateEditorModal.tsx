@@ -5,7 +5,7 @@ import {
   PRESCRIPTION_TYPES,
   type PrescriptionTemplate,
   type PrescriptionType,
-} from '@clinic/shared';
+} from '@shared';
 import { useCreateTemplate, useUpdateTemplate } from '../../api/prescriptions';
 import { Button } from '../../components/ui/Button';
 import { FormField } from '../../components/ui/FormField';

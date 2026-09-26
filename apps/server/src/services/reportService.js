@@ -11,10 +11,10 @@ import {
   PATIENT_GOALS,
   roundTo,
   todayIn,
-} from '@clinic/shared';
+} from '#shared';
 import { notFound } from '../lib/errors.js';
 
-/** @typedef {import('@clinic/shared').AppointmentStatus} AppointmentStatus */
+/** @typedef {import('#shared').AppointmentStatus} AppointmentStatus */
 
 const zeroStatuses = () =>
   /** @type {Record<AppointmentStatus, number>} */ (
@@ -39,8 +39,8 @@ export function createReportService({ repositories, now }, { settings }) {
 
   return {
     /**
-     * @param {import('@clinic/shared').ReportRangeQuery} q
-     * @returns {Promise<import('@clinic/shared').ReportsOverview>}
+     * @param {import('#shared').ReportRangeQuery} q
+     * @returns {Promise<import('#shared').ReportsOverview>}
      */
     async overview(q) {
       const { tz, today } = await clock();
@@ -96,7 +96,7 @@ export function createReportService({ repositories, now }, { settings }) {
         weights.set(m.patientId, list);
       }
       const goalOf = new Map(patients.map((p) => [p.id, p.goal]));
-      const buckets = /** @type {Record<import('@clinic/shared').OutcomeBucket, number>} */ (
+      const buckets = /** @type {Record<import('#shared').OutcomeBucket, number>} */ (
         Object.fromEntries(OUTCOME_BUCKETS.map((b) => [b, 0]))
       );
       /** @type {number[]} */
@@ -141,7 +141,7 @@ export function createReportService({ repositories, now }, { settings }) {
 
     /**
      * @param {string} patientId
-     * @returns {Promise<import('@clinic/shared').PatientReport>}
+     * @returns {Promise<import('#shared').PatientReport>}
      */
     async patient(patientId) {
       const patient = await repositories.patients.findById(patientId);

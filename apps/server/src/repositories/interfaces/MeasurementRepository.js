@@ -1,6 +1,6 @@
 import { CRUD_METHODS } from './common.js';
 
-/** @typedef {import('@clinic/shared').Measurement} Measurement */
+/** @typedef {import('#shared').Measurement} Measurement */
 
 /**
  * @typedef {import('./common.js').CrudRepository<Measurement> & {

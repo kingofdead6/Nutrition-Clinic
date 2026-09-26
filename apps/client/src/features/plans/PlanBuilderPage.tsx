@@ -23,7 +23,7 @@ import {
   type DietPlanWithPatient,
   type MealType,
   type PatientGoal,
-} from '@clinic/shared';
+} from '@shared';
 import {
   useActivatePlan,
   useCreatePlan,

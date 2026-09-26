@@ -9,7 +9,7 @@ import {
   type AppointmentWithPatient,
   type Patient,
   type PatientStatus,
-} from '@clinic/shared';
+} from '@shared';
 import { useUpcomingAppointments } from '../../api/appointments';
 import { useDashboardStats } from '../../api/dashboard';
 import { usePatients } from '../../api/patients';

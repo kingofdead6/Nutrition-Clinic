@@ -1,6 +1,6 @@
 import { MongoCrudRepository, translateErrors } from './MongoCrudRepository.js';
 
-/** @typedef {import('@clinic/shared').DietPlan} DietPlan */
+/** @typedef {import('#shared').DietPlan} DietPlan */
 /** @typedef {import('../interfaces/DietPlanRepository.js').DietPlanFilter} DietPlanFilter */
 
 /**

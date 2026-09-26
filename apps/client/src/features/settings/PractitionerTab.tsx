@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { clinicSettingsInputSchema, type ClinicSettingsResponse } from '@clinic/shared';
+import { clinicSettingsInputSchema, type ClinicSettingsResponse } from '@shared';
 import { useUpdateSettings } from '../../api/settings';
 import { Button } from '../../components/ui/Button';
 import { FormField } from '../../components/ui/FormField';

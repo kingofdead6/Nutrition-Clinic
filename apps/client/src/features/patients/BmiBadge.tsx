@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import type { BmiCategory } from '@clinic/shared';
+import type { BmiCategory } from '@shared';
 import { cn } from '../../lib/cn';
 
 const TONE: Record<BmiCategory, string> = {

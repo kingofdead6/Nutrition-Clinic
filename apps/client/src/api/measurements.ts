@@ -4,7 +4,7 @@ import type {
   MeasurementCreateInput,
   MeasurementUpdateInput,
   PatientProgress,
-} from '@clinic/shared';
+} from '@shared';
 import { apiClient } from '../lib/apiClient';
 import { invalidatePatientData } from './patients';
 

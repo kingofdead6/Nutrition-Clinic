@@ -1,11 +1,6 @@
 import { rateLimit } from 'express-rate-limit';
 import { Router } from 'express';
-import {
-  loginSchema,
-  passwordChangeSchema,
-  profileUpdateSchema,
-  setupSchema,
-} from '@clinic/shared';
+import { loginSchema, passwordChangeSchema, profileUpdateSchema, setupSchema } from '#shared';
 import { AppError } from '../lib/errors.js';
 import { clearSessionCookie, setSessionCookie } from '../lib/session.js';
 import { parseBody } from '../lib/validate.js';

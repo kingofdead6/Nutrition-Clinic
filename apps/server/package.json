@@ -5,7 +5,7 @@
   "type": "module",
   "main": "./src/app.js",
   "scripts": {
-    "dev": "nodemon --quiet --watch index.js --watch src --watch .env --watch ../../packages/shared/dist --ext js,json index.js",
+    "dev": "nodemon --quiet --watch index.js --watch src --watch .env --ext js,json index.js",
     "start": "node index.js",
     "test": "vitest run",
     "seed": "node src/scripts/seed.js",
@@ -52,5 +52,8 @@
     ".": "./src/app.js",
     "./server": "./src/server.js",
     "./config": "./src/config.js"
+  },
+  "imports": {
+    "#shared": "./src/shared/index.js"
   }
 }

@@ -8,7 +8,7 @@ import {
   UPLOAD_IMAGE_MIME_TYPES,
   UPLOAD_MAX_BYTES,
   type ClinicSettingsResponse,
-} from '@clinic/shared';
+} from '@shared';
 import { useRemoveLogo, useUpdateSettings, useUploadLogo } from '../../api/settings';
 import { ClinicLogo } from '../../components/layout/ClinicLogo';
 import { Button } from '../../components/ui/Button';

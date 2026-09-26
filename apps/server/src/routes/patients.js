@@ -9,7 +9,7 @@ import {
   patientCreateSchema,
   patientListQuerySchema,
   patientUpdateSchema,
-} from '@clinic/shared';
+} from '#shared';
 import { imageUpload, mimeForKey, requireImage } from '../lib/upload.js';
 import { parseBody, parseParams, parseQuery } from '../lib/validate.js';
 import { authenticate, requireRole } from '../middleware/auth.js';

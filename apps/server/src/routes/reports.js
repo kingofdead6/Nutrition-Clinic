@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { idParamsSchema, reportRangeQuerySchema } from '@clinic/shared';
+import { idParamsSchema, reportRangeQuerySchema } from '#shared';
 import { parseParams, parseQuery } from '../lib/validate.js';
 import { authenticate } from '../middleware/auth.js';
 

@@ -1,7 +1,7 @@
 import { CalendarDays, LogOut, Menu as MenuIcon, UserRound } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { formatDateOnly, todayIn, type AuthStatus, type User } from '@clinic/shared';
+import { formatDateOnly, todayIn, type AuthStatus, type User } from '@shared';
 import { useLogout } from '../../api/auth';
 import { Avatar } from '../ui/Avatar';
 import { Menu } from '../ui/Menu';

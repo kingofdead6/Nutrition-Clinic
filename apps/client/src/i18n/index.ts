@@ -1,6 +1,6 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import type { Locale } from '@clinic/shared';
+import type { Locale } from '@shared';
 import ar from './locales/ar.json';
 import fr from './locales/fr.json';
 

@@ -1,5 +1,5 @@
 import { format, parseISO } from 'date-fns';
-import { DISPLAY_DATE_FORMAT } from '@clinic/shared';
+import { DISPLAY_DATE_FORMAT } from '@shared';
 
 /** Formats a `YYYY-MM-DD` date or an ISO timestamp as `yyyy/MM/dd`. */
 export function formatDate(value: string | Date | null | undefined): string {

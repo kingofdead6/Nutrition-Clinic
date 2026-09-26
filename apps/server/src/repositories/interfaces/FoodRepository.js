@@ -1,11 +1,11 @@
 import { CRUD_METHODS } from './common.js';
 
-/** @typedef {import('@clinic/shared').Food} Food */
+/** @typedef {import('#shared').Food} Food */
 
 /**
  * @typedef {object} FoodFilter
  * @property {string} [search]  Matched against the normalized Arabic and French names.
- * @property {import('@clinic/shared').FoodCategory} [category]
+ * @property {import('#shared').FoodCategory} [category]
  */
 
 /**

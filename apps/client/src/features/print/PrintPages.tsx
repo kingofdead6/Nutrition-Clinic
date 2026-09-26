@@ -9,7 +9,7 @@ import {
   mealTotals,
   type DietPlanWithPatient,
   type PlanDay,
-} from '@clinic/shared';
+} from '@shared';
 import { usePatientPlans, useDietPlan } from '../../api/dietPlans';
 import { useMeasurements, useProgress } from '../../api/measurements';
 import { usePatient } from '../../api/patients';

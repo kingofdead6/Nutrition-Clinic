@@ -1,6 +1,6 @@
 import { Calculator } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { ageOn, suggestCalories, type PatientGoal } from '@clinic/shared';
+import { ageOn, suggestCalories, type PatientGoal } from '@shared';
 import { useMeasurements } from '../../api/measurements';
 import { usePatient } from '../../api/patients';
 import { Button } from '../../components/ui/Button';

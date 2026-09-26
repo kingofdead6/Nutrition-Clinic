@@ -7,7 +7,7 @@ import {
   measurementCreateSchema,
   type Measurement,
   type MeasurementFormValues,
-} from '@clinic/shared';
+} from '@shared';
 import { useCreateMeasurement, useUpdateMeasurement } from '../../api/measurements';
 import { Button } from '../../components/ui/Button';
 import { DatePicker } from '../../components/ui/DatePicker';

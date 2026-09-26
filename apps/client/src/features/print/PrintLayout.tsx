@@ -2,7 +2,7 @@ import { ArrowRight, Printer } from 'lucide-react';
 import { useEffect, useRef, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router-dom';
-import { formatDateOnly, type ClinicSettingsResponse } from '@clinic/shared';
+import { formatDateOnly, type ClinicSettingsResponse } from '@shared';
 import { useSettings } from '../../api/settings';
 import { ClinicLogo } from '../../components/layout/ClinicLogo';
 import { Button } from '../../components/ui/Button';

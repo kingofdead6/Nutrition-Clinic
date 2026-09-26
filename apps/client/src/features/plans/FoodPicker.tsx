@@ -1,7 +1,7 @@
 import { Plus } from 'lucide-react';
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { Food } from '@clinic/shared';
+import type { Food } from '@shared';
 import { useFoods } from '../../api/foods';
 import { cn } from '../../lib/cn';
 

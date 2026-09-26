@@ -8,7 +8,7 @@ import {
   type AppointmentStatus,
   type AppointmentWithPatient,
   type WorkingDay,
-} from '@clinic/shared';
+} from '@shared';
 import { cn } from '../../lib/cn';
 import { calendarRange, workingDayOf } from './workingHours';
 

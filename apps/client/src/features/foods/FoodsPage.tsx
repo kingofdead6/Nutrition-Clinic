@@ -2,7 +2,7 @@ import { Apple, Download, PackagePlus, Pencil, Plus, Trash2, Upload } from 'luci
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router-dom';
-import { FOOD_CATEGORIES, FOOD_CSV_COLUMNS, type Food, type FoodCategory } from '@clinic/shared';
+import { FOOD_CATEGORIES, FOOD_CSV_COLUMNS, type Food, type FoodCategory } from '@shared';
 import { useDeleteFood, useFoods, useInstallDefaultFoods } from '../../api/foods';
 import { Button } from '../../components/ui/Button';
 import { Card } from '../../components/ui/Card';

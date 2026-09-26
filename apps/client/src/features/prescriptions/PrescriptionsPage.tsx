@@ -2,11 +2,7 @@ import { FileText, PackagePlus, Pencil, Plus, Printer, Trash2 } from 'lucide-rea
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import {
-  formatDateOnly,
-  type PrescriptionTemplate,
-  type PrescriptionWithPatient,
-} from '@clinic/shared';
+import { formatDateOnly, type PrescriptionTemplate, type PrescriptionWithPatient } from '@shared';
 import {
   useDeleteTemplate,
   useInstallDefaultTemplates,

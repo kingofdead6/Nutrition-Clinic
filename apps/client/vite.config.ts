@@ -1,6 +1,7 @@
+/// <reference types="vitest/config" />
 import { fileURLToPath } from 'node:url';
 import react from '@vitejs/plugin-react';
-import { defaultClientConditions, defineConfig, loadEnv } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
@@ -10,9 +11,12 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [react()],
-    // Use @clinic/shared's TypeScript source directly (its "source" export), so shared
-    // edits hot-reload without waiting for the package build.
-    resolve: { conditions: ['source', ...defaultClientConditions] },
+    // Code shared with the server (schemas, calculations). The server gets a generated JS
+    // copy: run `npm run sync:shared` from the repo root after editing src/shared.
+    resolve: {
+      alias: { '@shared': fileURLToPath(new URL('./src/shared/index.ts', import.meta.url)) },
+    },
+    test: { include: ['src/**/*.test.ts'], environment: 'node' },
     server: {
       port: 5173,
       strictPort: true,

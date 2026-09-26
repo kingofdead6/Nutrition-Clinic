@@ -1,4 +1,4 @@
-import type { ApiErrorBody, ErrorCode } from '@clinic/shared';
+import type { ApiErrorBody, ErrorCode } from '@shared';
 
 /**
  * The single entry point for HTTP calls. The base URL comes from VITE_API_URL

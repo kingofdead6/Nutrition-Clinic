@@ -2,7 +2,7 @@ import { AppError, conflict, notFound } from '../lib/errors.js';
 import { hashPassword, verifyPassword } from '../lib/password.js';
 import { DuplicateKeyError } from '../repositories/errors.js';
 
-/** @typedef {import('@clinic/shared').User} User */
+/** @typedef {import('#shared').User} User */
 /** @typedef {import('../repositories/interfaces/UserRepository.js').UserRecord} UserRecord */
 
 /**
@@ -61,7 +61,7 @@ export function createUserService({ repositories, config }) {
       return (await users.listAll()).map(toPublicUser);
     },
 
-    /** @param {import('@clinic/shared').UserCreateInput} input */
+    /** @param {import('#shared').UserCreateInput} input */
     async create(input) {
       const { password, ...rest } = input;
       const record = await withEmailUniqueness(async () =>
@@ -77,7 +77,7 @@ export function createUserService({ repositories, config }) {
     /**
      * @param {User} actor
      * @param {string} id
-     * @param {import('@clinic/shared').UserUpdateInput} patch
+     * @param {import('#shared').UserUpdateInput} patch
      */
     async update(actor, id, patch) {
       const target = await getRecord(id);
@@ -108,7 +108,7 @@ export function createUserService({ repositories, config }) {
 
     /**
      * @param {string} id
-     * @param {import('@clinic/shared').ProfileUpdateInput} input
+     * @param {import('#shared').ProfileUpdateInput} input
      */
     async updateProfile(id, input) {
       const updated = await withEmailUniqueness(() => users.update(id, input));

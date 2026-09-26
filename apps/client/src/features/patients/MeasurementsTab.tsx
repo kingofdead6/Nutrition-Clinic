@@ -1,12 +1,7 @@
 import { ArrowDownRight, ArrowUpRight, Pencil, Plus, Ruler, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  formatDateOnly,
-  type Measurement,
-  type Patient,
-  type PatientProgress,
-} from '@clinic/shared';
+import { formatDateOnly, type Measurement, type Patient, type PatientProgress } from '@shared';
 import { useDeleteMeasurement, useMeasurements, useProgress } from '../../api/measurements';
 import { MetricLineChart, WaistHipChart } from '../../components/charts/ProgressCharts';
 import { Button } from '../../components/ui/Button';

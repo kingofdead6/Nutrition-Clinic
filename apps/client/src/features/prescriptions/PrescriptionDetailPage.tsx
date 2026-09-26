@@ -2,7 +2,7 @@ import { Check, Pencil, Printer, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
-import type { PrescriptionWithPatient } from '@clinic/shared';
+import type { PrescriptionWithPatient } from '@shared';
 import {
   useDeletePrescription,
   usePrescription,

@@ -1,8 +1,8 @@
 import { randomUUID } from 'node:crypto';
-import { clinicSettingsInputSchema } from '@clinic/shared';
+import { clinicSettingsInputSchema } from '#shared';
 import { notFound } from '../lib/errors.js';
 
-/** @typedef {import('@clinic/shared').ClinicSettings} ClinicSettings */
+/** @typedef {import('#shared').ClinicSettings} ClinicSettings */
 
 /** Full settings record with every default, for the first time settings are read. */
 function defaultSettings() {
@@ -29,7 +29,7 @@ export function createSettingsService({ repositories, storage, logger }) {
   return {
     get,
 
-    /** @param {import('@clinic/shared').ClinicSettingsUpdateInput} patch */
+    /** @param {import('#shared').ClinicSettingsUpdateInput} patch */
     async update(patch) {
       await get();
       return repo.upsert(patch);

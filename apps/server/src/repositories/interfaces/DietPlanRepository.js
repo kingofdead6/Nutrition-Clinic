@@ -1,6 +1,6 @@
 import { CRUD_METHODS } from './common.js';
 
-/** @typedef {import('@clinic/shared').DietPlan} DietPlan */
+/** @typedef {import('#shared').DietPlan} DietPlan */
 
 /**
  * @typedef {object} DietPlanFilter

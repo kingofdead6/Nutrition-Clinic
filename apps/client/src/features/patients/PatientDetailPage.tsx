@@ -2,7 +2,7 @@ import { Archive, ArchiveRestore, Camera, Pencil, Phone, Printer, Trash2 } from 
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { ageOn, UPLOAD_IMAGE_MIME_TYPES, UPLOAD_MAX_BYTES, type Patient } from '@clinic/shared';
+import { ageOn, UPLOAD_IMAGE_MIME_TYPES, UPLOAD_MAX_BYTES, type Patient } from '@shared';
 import { useMe } from '../../api/auth';
 import {
   useArchivePatient,

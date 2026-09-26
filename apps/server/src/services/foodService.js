@@ -1,9 +1,9 @@
-import { FOOD_CSV_COLUMNS, foodCreateSchema, normalizeArabic } from '@clinic/shared';
+import { FOOD_CSV_COLUMNS, foodCreateSchema, normalizeArabic } from '#shared';
 import { AppError, notFound } from '../lib/errors.js';
 import { parseCsv } from '../lib/csv.js';
 import { defaultFoods } from '../data/defaultFoods.js';
 
-/** @typedef {import('@clinic/shared').Food} Food */
+/** @typedef {import('#shared').Food} Food */
 
 const NUMERIC = new Set(['servingSize', 'calories', 'proteinG', 'carbsG', 'fatG', 'fiberG']);
 export const MAX_IMPORT_ROWS = 2000;
@@ -25,7 +25,7 @@ export function createFoodService({ repositories }) {
   }
 
   return {
-    /** @param {import('@clinic/shared').FoodListQuery} q */
+    /** @param {import('#shared').FoodListQuery} q */
     async list(q) {
       const { items, total } = await repo.list(
         { search: q.search, category: q.category },
@@ -36,12 +36,12 @@ export function createFoodService({ repositories }) {
 
     get: getOrThrow,
 
-    /** @param {import('@clinic/shared').FoodCreateInput} input */
+    /** @param {import('#shared').FoodCreateInput} input */
     create(input) {
       return repo.create({ ...input, isCustom: true });
     },
 
-    /** @param {string} id @param {import('@clinic/shared').FoodUpdateInput} patch */
+    /** @param {string} id @param {import('#shared').FoodUpdateInput} patch */
     async update(id, patch) {
       await getOrThrow(id);
       return /** @type {Food} */ (await repo.update(id, patch));
@@ -74,7 +74,7 @@ export function createFoodService({ repositories }) {
      * are skipped. `dryRun` validates without writing.
      * @param {string} text
      * @param {{ dryRun?: boolean }} [options]
-     * @returns {Promise<import('@clinic/shared').FoodImportResult>}
+     * @returns {Promise<import('#shared').FoodImportResult>}
      */
     async importCsv(text, { dryRun = false } = {}) {
       const rows = parseCsv(text);
@@ -92,7 +92,7 @@ export function createFoodService({ repositories }) {
         throw new AppError('PAYLOAD_TOO_LARGE', 'errors.csvTooManyRows');
 
       const names = await existingNames();
-      /** @type {import('@clinic/shared').FoodImportResult['errors']} */
+      /** @type {import('#shared').FoodImportResult['errors']} */
       const errors = [];
       /** @type {import('../repositories/interfaces/common.js').NewEntity<Food>[]} */
       const toCreate = [];

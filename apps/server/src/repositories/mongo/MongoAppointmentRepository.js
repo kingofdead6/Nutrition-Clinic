@@ -6,7 +6,7 @@ import { MongoCrudRepository } from './MongoCrudRepository.js';
 const ORDER = { date: 1, time: 1 };
 
 /**
- * @extends {MongoCrudRepository<import('@clinic/shared').Appointment>}
+ * @extends {MongoCrudRepository<import('#shared').Appointment>}
  * @implements {import('../interfaces/AppointmentRepository.js').AppointmentRepository}
  */
 export class MongoAppointmentRepository extends MongoCrudRepository {
@@ -46,7 +46,7 @@ export class MongoAppointmentRepository extends MongoCrudRepository {
 
   /**
    * @param {{ date: string, time: string }} from
-   * @param {readonly import('@clinic/shared').AppointmentStatus[]} statuses
+   * @param {readonly import('#shared').AppointmentStatus[]} statuses
    * @param {number} limit
    */
   findUpcoming(from, statuses, limit) {

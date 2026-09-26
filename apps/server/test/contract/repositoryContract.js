@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { BACKUP_COLLECTIONS } from '@clinic/shared';
+import { BACKUP_COLLECTIONS } from '#shared';
 import { DuplicateKeyError, REPOSITORY_CONTRACT } from '../../src/repositories/index.js';
 import { patientFixture } from '../helpers.js';
 
@@ -7,7 +7,7 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{1
 
 /**
  * @param {string} patientId
- * @param {Partial<import('../../src/repositories/interfaces/common.js').NewEntity<import('@clinic/shared').DietPlan>>} [over]
+ * @param {Partial<import('../../src/repositories/interfaces/common.js').NewEntity<import('#shared').DietPlan>>} [over]
  */
 const planFixture = (patientId, over = {}) => ({
   patientId,

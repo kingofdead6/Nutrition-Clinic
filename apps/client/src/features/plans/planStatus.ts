@@ -1,4 +1,4 @@
-import type { DietPlan } from '@clinic/shared';
+import type { DietPlan } from '@shared';
 
 export type PlanStatus = 'template' | 'active' | 'ended' | 'inactive';
 

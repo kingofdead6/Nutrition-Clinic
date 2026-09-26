@@ -1,7 +1,7 @@
 import { MongoCrudRepository } from './MongoCrudRepository.js';
 
 /**
- * @extends {MongoCrudRepository<import('@clinic/shared').Prescription>}
+ * @extends {MongoCrudRepository<import('#shared').Prescription>}
  * @implements {import('../interfaces/PrescriptionRepository.js').PrescriptionRepository}
  */
 export class MongoPrescriptionRepository extends MongoCrudRepository {
@@ -18,7 +18,7 @@ export class MongoPrescriptionRepository extends MongoCrudRepository {
 }
 
 /**
- * @extends {MongoCrudRepository<import('@clinic/shared').PrescriptionTemplate>}
+ * @extends {MongoCrudRepository<import('#shared').PrescriptionTemplate>}
  * @implements {import('../interfaces/PrescriptionTemplateRepository.js').PrescriptionTemplateRepository}
  */
 export class MongoPrescriptionTemplateRepository extends MongoCrudRepository {

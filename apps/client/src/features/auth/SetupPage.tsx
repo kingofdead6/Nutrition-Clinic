@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { DEFAULT_SETTINGS, setupSchema } from '@clinic/shared';
+import { DEFAULT_SETTINGS, setupSchema } from '@shared';
 import { useSetup } from '../../api/auth';
 import { Button } from '../../components/ui/Button';
 import { FormField } from '../../components/ui/FormField';

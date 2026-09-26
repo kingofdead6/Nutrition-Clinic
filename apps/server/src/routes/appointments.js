@@ -6,7 +6,7 @@ import {
   appointmentUpdateSchema,
   idParamsSchema,
   upcomingQuerySchema,
-} from '@clinic/shared';
+} from '#shared';
 import { parseBody, parseParams, parseQuery } from '../lib/validate.js';
 import { authenticate } from '../middleware/auth.js';
 

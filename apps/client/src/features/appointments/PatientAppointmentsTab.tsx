@@ -1,7 +1,7 @@
 import { Plus } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { AppointmentWithPatient, Patient } from '@clinic/shared';
+import type { AppointmentWithPatient, Patient } from '@shared';
 import { useAppointments } from '../../api/appointments';
 import { Button } from '../../components/ui/Button';
 import { AppointmentFormModal } from './AppointmentFormModal';

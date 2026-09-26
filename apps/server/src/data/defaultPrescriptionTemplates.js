@@ -1,7 +1,7 @@
 /**
  * The four starter prescription templates (Arabic). Installed at first-run setup and
  * from the prescriptions page; the seed script reuses them.
- * @returns {import('../repositories/interfaces/common.js').NewEntity<import('@clinic/shared').PrescriptionTemplate>[]}
+ * @returns {import('../repositories/interfaces/common.js').NewEntity<import('#shared').PrescriptionTemplate>[]}
  */
 export function defaultPrescriptionTemplates() {
   return [

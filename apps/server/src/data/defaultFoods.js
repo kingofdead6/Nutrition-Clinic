@@ -5,7 +5,7 @@
  * calories, proteinG, carbsG, fatG, fiberG.
  */
 
-/** @type {Array<[string, string, import('@clinic/shared').FoodCategory, number, import('@clinic/shared').ServingUnit, number, number, number, number, number]>} */
+/** @type {Array<[string, string, import('#shared').FoodCategory, number, import('#shared').ServingUnit, number, number, number, number, number]>} */
 const ROWS = [
   // Grains & starches
   ['خبز أبيض (باقيت)', 'Baguette', 'grains', 50, 'g', 135, 4.5, 27.5, 0.8, 1.3],
@@ -134,7 +134,7 @@ const ROWS = [
   ['مطلوع', "Matlou' (pain maison)", 'traditional', 100, 'g', 280, 8.5, 55, 2.5, 2.5],
 ];
 
-/** @returns {import('../repositories/interfaces/common.js').NewEntity<import('@clinic/shared').Food>[]} */
+/** @returns {import('../repositories/interfaces/common.js').NewEntity<import('#shared').Food>[]} */
 export function defaultFoods() {
   return ROWS.map(([name, nameFr, category, servingSize, servingUnit, calories, proteinG, carbsG, fatG, fiberG]) => ({
     name,

@@ -11,7 +11,7 @@ import { USER_REPOSITORY_METHODS } from './UserRepository.js';
 /**
  * Driver-level operations that are not tied to an aggregate.
  * @typedef {object} DatabaseHandle
- * @property {import('@clinic/shared').DbDriver} driver
+ * @property {import('#shared').DbDriver} driver
  * @property {() => Promise<boolean>} ping
  * @property {() => Promise<void>} close
  */

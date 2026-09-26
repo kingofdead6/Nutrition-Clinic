@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
-import { USER_ROLES, userCreateSchema, type User } from '@clinic/shared';
+import { USER_ROLES, userCreateSchema, type User } from '@shared';
 import { useMe } from '../../api/auth';
 import { useCreateUser, useDeleteUser, useUpdateUser, useUsers } from '../../api/users';
 import { Button } from '../../components/ui/Button';

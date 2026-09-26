@@ -6,7 +6,7 @@ import { usePatientPrescriptions } from '../../api/prescriptions';
 import { openPrint } from '../../lib/print';
 import { RecentPrescriptionsCard } from '../prescriptions/PatientPrescriptions';
 import { PatientReportTab } from '../reports/PatientReport';
-import { ageOn, type Patient } from '@clinic/shared';
+import { ageOn, type Patient } from '@shared';
 import { usePatient } from '../../api/patients';
 import { Button, ButtonLink } from '../../components/ui/Button';
 import { Card } from '../../components/ui/Card';

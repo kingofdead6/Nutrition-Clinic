@@ -1,12 +1,7 @@
 import { Router } from 'express';
 import multer from 'multer';
 import { z } from 'zod';
-import {
-  foodCreateSchema,
-  foodListQuerySchema,
-  foodUpdateSchema,
-  idParamsSchema,
-} from '@clinic/shared';
+import { foodCreateSchema, foodListQuerySchema, foodUpdateSchema, idParamsSchema } from '#shared';
 import { AppError } from '../lib/errors.js';
 import { parseBody, parseParams, parseQuery } from '../lib/validate.js';
 import { authenticate, requireRole } from '../middleware/auth.js';

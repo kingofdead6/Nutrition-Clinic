@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import type { ClinicSettingsResponse, Locale } from '@clinic/shared';
+import type { ClinicSettingsResponse, Locale } from '@shared';
 import { useUpdateSettings } from '../../api/settings';
 import { FormField } from '../../components/ui/FormField';
 import { Select } from '../../components/ui/Input';

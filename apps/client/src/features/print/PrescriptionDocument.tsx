@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { ageOn, type PrescriptionPreview } from '@clinic/shared';
+import { ageOn, type PrescriptionPreview } from '@shared';
 import { RichTextView } from '../../components/ui/RichText';
 import { Letterhead, PrintFooter } from './PrintLayout';
 

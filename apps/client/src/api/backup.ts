@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import type { BackupImportResult, BackupInfo } from '@clinic/shared';
+import type { BackupImportResult, BackupInfo } from '@shared';
 import { apiClient } from '../lib/apiClient';
 
 export const BACKUP_KEY = ['backup'] as const;

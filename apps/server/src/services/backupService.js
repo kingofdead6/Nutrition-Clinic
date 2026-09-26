@@ -19,10 +19,10 @@ import {
   prescriptionSchema,
   prescriptionTemplateSchema,
   userSchema,
-} from '@clinic/shared';
+} from '#shared';
 import { AppError, notFound } from '../lib/errors.js';
 
-/** @typedef {import('@clinic/shared').BackupCollection} BackupCollection */
+/** @typedef {import('#shared').BackupCollection} BackupCollection */
 
 /** Record schemas used to validate a backup before anything is replaced. */
 const SCHEMAS = /** @type {Record<BackupCollection, z.ZodType>} */ ({
@@ -185,7 +185,7 @@ export function createBackupService({ repositories, storage, config, now, logger
       return { name, path: path.join(dir, name) };
     },
 
-    /** @returns {Promise<import('@clinic/shared').BackupInfo>} */
+    /** @returns {Promise<import('#shared').BackupInfo>} */
     async info() {
       const settings = await repositories.settings.get();
       await mkdir(dir, { recursive: true });
@@ -220,7 +220,7 @@ export function createBackupService({ repositories, storage, config, now, logger
      * every collection and the uploaded files.
      * @param {Buffer} buffer
      * @param {{ dryRun: boolean, confirm: boolean }} options
-     * @returns {Promise<import('@clinic/shared').BackupImportResult>}
+     * @returns {Promise<import('#shared').BackupImportResult>}
      */
     async importBackup(buffer, { dryRun, confirm }) {
       const { data, collections, files } = readArchive(buffer);

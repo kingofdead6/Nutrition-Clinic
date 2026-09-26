@@ -1,5 +1,5 @@
 import sanitize from 'sanitize-html';
-import { RICH_TEXT_TAGS } from '@clinic/shared';
+import { RICH_TEXT_TAGS } from '#shared';
 
 /**
  * Keeps only the rich-text subset (no attributes, no styles, no links, no scripts).

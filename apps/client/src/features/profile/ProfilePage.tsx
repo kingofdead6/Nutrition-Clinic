@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { passwordChangeSchema, profileUpdateSchema, type User } from '@clinic/shared';
+import { passwordChangeSchema, profileUpdateSchema, type User } from '@shared';
 import { useChangePassword, useMe, useUpdateProfile } from '../../api/auth';
 import { Button } from '../../components/ui/Button';
 import { Card, CardTitle } from '../../components/ui/Card';

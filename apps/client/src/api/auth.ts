@@ -7,7 +7,7 @@ import type {
   ProfileUpdateInput,
   SetupInput,
   User,
-} from '@clinic/shared';
+} from '@shared';
 import { ApiError, apiClient } from '../lib/apiClient';
 import { ME_QUERY_KEY } from '../lib/queryClient';
 

@@ -10,7 +10,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import { OUTCOME_BUCKETS, type OutcomeBucket } from '@clinic/shared';
+import { OUTCOME_BUCKETS, type OutcomeBucket } from '@shared';
 import { ChartCard } from './ProgressCharts';
 import { CHART } from './tokens';
 

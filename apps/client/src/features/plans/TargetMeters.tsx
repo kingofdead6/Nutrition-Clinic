@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { macroGrams, type MacroTargets, type NutritionTotals } from '@clinic/shared';
+import { macroGrams, type MacroTargets, type NutritionTotals } from '@shared';
 import { cn } from '../../lib/cn';
 
 /**

@@ -1,8 +1,8 @@
-import { findConflict, nowTimeIn, todayIn, UPCOMING_STATUSES } from '@clinic/shared';
+import { findConflict, nowTimeIn, todayIn, UPCOMING_STATUSES } from '#shared';
 import { AppError, conflict, notFound } from '../lib/errors.js';
 
-/** @typedef {import('@clinic/shared').Appointment} Appointment */
-/** @typedef {import('@clinic/shared').AppointmentWithPatient} AppointmentWithPatient */
+/** @typedef {import('#shared').Appointment} Appointment */
+/** @typedef {import('#shared').AppointmentWithPatient} AppointmentWithPatient */
 
 /**
  * @param {import('../context.js').AppContext} ctx
@@ -58,7 +58,7 @@ export function createAppointmentService({ repositories, now }, { settings, pati
     const clash = findConflict(candidate, sameDay);
     if (!clash) return;
     const [joined] = await withPatients([clash]);
-    /** @type {import('@clinic/shared').AppointmentConflictDetails} */
+    /** @type {import('#shared').AppointmentConflictDetails} */
     const details = {
       appointmentId: clash.id,
       date: clash.date,
@@ -80,7 +80,7 @@ export function createAppointmentService({ repositories, now }, { settings, pati
   }
 
   return {
-    /** @param {import('@clinic/shared').AppointmentListQuery} q */
+    /** @param {import('#shared').AppointmentListQuery} q */
     async list(q) {
       const { items, total } = await repo.list(
         { from: q.from, to: q.to, status: q.status, patientId: q.patientId },
@@ -108,7 +108,7 @@ export function createAppointmentService({ repositories, now }, { settings, pati
       return joined;
     },
 
-    /** @param {import('@clinic/shared').AppointmentCreateInput} input */
+    /** @param {import('#shared').AppointmentCreateInput} input */
     async create(input) {
       await assertPatient(input.patientId);
       await assertFree(input);
@@ -119,7 +119,7 @@ export function createAppointmentService({ repositories, now }, { settings, pati
 
     /**
      * @param {string} id
-     * @param {import('@clinic/shared').AppointmentUpdateInput} patch
+     * @param {import('#shared').AppointmentUpdateInput} patch
      */
     async update(id, patch) {
       const current = await getOrThrow(id);
@@ -137,7 +137,7 @@ export function createAppointmentService({ repositories, now }, { settings, pati
       return this.get(id);
     },
 
-    /** @param {string} id @param {import('@clinic/shared').AppointmentStatus} status */
+    /** @param {string} id @param {import('#shared').AppointmentStatus} status */
     setStatus(id, status) {
       return this.update(id, { status });
     },

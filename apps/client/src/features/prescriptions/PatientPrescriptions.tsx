@@ -1,7 +1,7 @@
 import { FileText, Plus, Printer } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { formatDateOnly, type Patient } from '@clinic/shared';
+import { formatDateOnly, type Patient } from '@shared';
 import { usePatientPrescriptions } from '../../api/prescriptions';
 import { ButtonLink } from '../../components/ui/Button';
 import { Card, CardTitle } from '../../components/ui/Card';

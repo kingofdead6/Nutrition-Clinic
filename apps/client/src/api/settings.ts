@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import type { ClinicSettingsResponse, ClinicSettingsUpdateInput } from '@clinic/shared';
+import type { ClinicSettingsResponse, ClinicSettingsUpdateInput } from '@shared';
 import { apiClient } from '../lib/apiClient';
 import { AUTH_STATUS_KEY } from './auth';
 

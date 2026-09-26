@@ -3,7 +3,7 @@ import { CRUD_METHODS } from './common.js';
 /**
  * Server-side user record. Never serialize this; map to `User` first (toPublicUser).
  * `tokenVersion` is bumped to revoke existing sessions (password change, deactivation).
- * @typedef {import('@clinic/shared').User & { passwordHash: string, tokenVersion: number }} UserRecord
+ * @typedef {import('#shared').User & { passwordHash: string, tokenVersion: number }} UserRecord
  */
 
 /**

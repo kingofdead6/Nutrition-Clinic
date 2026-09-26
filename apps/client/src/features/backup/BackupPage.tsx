@@ -2,7 +2,7 @@ import { DatabaseBackup, Download, FileUp, ShieldAlert } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { BACKUP_COLLECTIONS, type BackupImportResult, type StoredBackup } from '@clinic/shared';
+import { BACKUP_COLLECTIONS, type BackupImportResult, type StoredBackup } from '@shared';
 import { useMe, useLogout } from '../../api/auth';
 import {
   downloadStoredBackup,

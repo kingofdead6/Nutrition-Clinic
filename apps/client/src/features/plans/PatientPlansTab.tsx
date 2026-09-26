@@ -2,7 +2,7 @@ import { LayoutTemplate, Plus, Power, UtensilsCrossed } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { formatDateOnly, type DietPlanWithPatient, type Patient } from '@clinic/shared';
+import { formatDateOnly, type DietPlanWithPatient, type Patient } from '@shared';
 import {
   useActivatePlan,
   useDietPlans,

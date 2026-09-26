@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { APP_VERSION } from '@clinic/shared';
+import { APP_VERSION } from '#shared';
 
 /** @param {import('../context.js').AppContext} ctx */
 export function healthRouter({ repositories }) {
@@ -7,7 +7,7 @@ export function healthRouter({ repositories }) {
 
   router.get('/health', async (_req, res) => {
     const up = await repositories.db.ping();
-    /** @type {import('@clinic/shared').HealthResponse} */
+    /** @type {import('#shared').HealthResponse} */
     const body = {
       status: up ? 'ok' : 'degraded',
       version: APP_VERSION,

@@ -14,7 +14,17 @@ const rtlMessage =
   'Use logical Tailwind utilities (ms/me/ps/pe/start/end/text-start…) instead of left/right ones (RTL).';
 
 export default tseslint.config(
-  { ignores: ['**/dist/**', '**/node_modules/**', '**/coverage/**', '**/data/**'] },
+  {
+    ignores: [
+      '**/dist/**',
+      '**/node_modules/**',
+      '**/coverage/**',
+      'data/**',
+      'apps/server/data/**',
+      // Generated from apps/client/src/shared (npm run sync:shared).
+      'apps/server/src/shared/**',
+    ],
+  },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
@@ -28,7 +38,7 @@ export default tseslint.config(
     },
   },
   {
-    files: ['apps/server/**/*.js', 'packages/shared/**/*.ts'],
+    files: ['apps/server/**/*.js', 'scripts/**/*.mjs'],
     languageOptions: { globals: globals.node },
   },
   {

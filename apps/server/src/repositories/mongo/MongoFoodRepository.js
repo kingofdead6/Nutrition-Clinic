@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import { buildSearchKey, normalizeArabic } from '@clinic/shared';
+import { buildSearchKey, normalizeArabic } from '#shared';
 import {
   escapeRegex,
   MongoCrudRepository,
@@ -7,7 +7,7 @@ import {
   translateErrors,
 } from './MongoCrudRepository.js';
 
-/** @typedef {import('@clinic/shared').Food} Food */
+/** @typedef {import('#shared').Food} Food */
 
 /**
  * @extends {MongoCrudRepository<Food>}

@@ -1,7 +1,7 @@
 import { CRUD_METHODS } from './common.js';
 
-/** @typedef {import('@clinic/shared').Appointment} Appointment */
-/** @typedef {import('@clinic/shared').AppointmentStatus} AppointmentStatus */
+/** @typedef {import('#shared').Appointment} Appointment */
+/** @typedef {import('#shared').AppointmentStatus} AppointmentStatus */
 
 /**
  * @typedef {object} AppointmentFilter

@@ -1,7 +1,7 @@
 import { Printer } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import { APPOINTMENT_STATUSES, formatDateOnly, type PatientReport } from '@clinic/shared';
+import { APPOINTMENT_STATUSES, formatDateOnly, type PatientReport } from '@shared';
 import { usePatientReport } from '../../api/reports';
 import { MetricLineChart, WaistHipChart } from '../../components/charts/ProgressCharts';
 import { HorizontalBars } from '../../components/charts/ReportCharts';

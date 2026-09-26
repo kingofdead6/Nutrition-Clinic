@@ -1,7 +1,7 @@
 import { X } from 'lucide-react';
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { Patient } from '@clinic/shared';
+import type { Patient } from '@shared';
 import { usePatients } from '../../api/patients';
 import { cn } from '../../lib/cn';
 import { PatientAvatar } from '../patients/PatientAvatar';

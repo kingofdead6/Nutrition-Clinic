@@ -1,5 +1,5 @@
 import DOMPurify from 'dompurify';
-import { RICH_TEXT_TAGS } from '@clinic/shared';
+import { RICH_TEXT_TAGS } from '@shared';
 
 /** Same allowlist as the server: a few formatting tags, no attributes at all. */
 export function sanitizeRichText(html: string): string {

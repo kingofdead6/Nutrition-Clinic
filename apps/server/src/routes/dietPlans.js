@@ -5,7 +5,7 @@ import {
   dietPlanListQuerySchema,
   dietPlanUpdateSchema,
   idParamsSchema,
-} from '@clinic/shared';
+} from '#shared';
 import { parseBody, parseParams, parseQuery } from '../lib/validate.js';
 import { authenticate, requireRole } from '../middleware/auth.js';
 

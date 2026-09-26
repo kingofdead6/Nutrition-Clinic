@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ageOn, formatDateOnly, type Patient } from '@clinic/shared';
+import { ageOn, formatDateOnly, type Patient } from '@shared';
 import { useMeasurements, useProgress } from '../../api/measurements';
 import { MetricLineChart, WaistHipChart } from '../../components/charts/ProgressCharts';
 import { Card, CardTitle } from '../../components/ui/Card';

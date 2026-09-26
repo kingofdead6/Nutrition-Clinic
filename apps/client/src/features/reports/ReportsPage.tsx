@@ -8,7 +8,7 @@ import {
   monthStart,
   OUTCOME_BUCKETS,
   type ReportRangeQuery,
-} from '@clinic/shared';
+} from '@shared';
 import { useReportsOverview } from '../../api/reports';
 import {
   HorizontalBars,

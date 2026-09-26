@@ -4,24 +4,23 @@
   "private": true,
   "description": "عيادة التغذية — patient-management platform for a dietitian's clinic",
   "workspaces": [
-    "packages/*",
     "apps/*"
   ],
   "engines": {
     "node": ">=20.19"
   },
   "scripts": {
-    "prepare": "npm run build -w @clinic/shared",
-    "dev": "npm run build -w @clinic/shared && concurrently -k -n shared,server,client -c gray,green,cyan \"npm:dev -w @clinic/shared\" \"npm:dev -w @clinic/server\" \"npm:dev -w @clinic/client\"",
-    "build": "npm run build -w @clinic/shared && npm run build -w @clinic/client",
+    "dev": "concurrently -k -n server,client -c green,cyan \"npm:dev -w @clinic/server\" \"npm:dev -w @clinic/client\"",
+    "build": "npm run build -w @clinic/client",
     "start": "npm run start -w @clinic/server",
-    "typecheck": "npm run typecheck -w @clinic/shared && npm run typecheck -w @clinic/client",
-    "test": "npm run build -w @clinic/shared && npm run test --workspaces --if-present",
+    "typecheck": "npm run typecheck -w @clinic/client",
+    "test": "node scripts/sync-shared.mjs --check && npm run test --workspaces --if-present",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "seed": "npm run seed -w @clinic/server",
-    "backup": "npm run backup -w @clinic/server --"
+    "backup": "npm run backup -w @clinic/server --",
+    "sync:shared": "node scripts/sync-shared.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

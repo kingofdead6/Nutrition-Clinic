@@ -10,7 +10,7 @@ import {
   startOfWeek,
   type AppointmentStatus,
   type AppointmentWithPatient,
-} from '@clinic/shared';
+} from '@shared';
 import { useAppointments } from '../../api/appointments';
 import { useAuthStatus } from '../../api/auth';
 import { useSettings } from '../../api/settings';

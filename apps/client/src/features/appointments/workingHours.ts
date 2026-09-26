@@ -1,4 +1,4 @@
-import { timeToMinutes, weekdayKeyOf, type WorkingDay } from '@clinic/shared';
+import { timeToMinutes, weekdayKeyOf, type WorkingDay } from '@shared';
 
 export const workingDayOf = (hours: readonly WorkingDay[] | undefined, date: string) =>
   hours?.find((d) => d.day === weekdayKeyOf(date));

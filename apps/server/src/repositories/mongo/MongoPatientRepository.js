@@ -1,13 +1,8 @@
-import {
-  buildSearchKey,
-  FILE_NUMBER_PREFIX,
-  normalizeArabic,
-  PATIENT_STATUSES,
-} from '@clinic/shared';
+import { buildSearchKey, FILE_NUMBER_PREFIX, normalizeArabic, PATIENT_STATUSES } from '#shared';
 import { escapeRegex, MongoCrudRepository } from './MongoCrudRepository.js';
 
-/** @typedef {import('@clinic/shared').Patient} Patient */
-/** @typedef {import('@clinic/shared').PatientStatus} PatientStatus */
+/** @typedef {import('#shared').Patient} Patient */
+/** @typedef {import('#shared').PatientStatus} PatientStatus */
 /** @typedef {import('../interfaces/PatientRepository.js').PatientFilter} PatientFilter */
 
 const COUNTER_ID = 'patientFileNumber';
@@ -48,7 +43,7 @@ export class MongoPatientRepository extends MongoCrudRepository {
   /**
    * @param {PatientFilter} filter
    * @param {import('../interfaces/common.js').PageRequest} page
-   * @param {import('../interfaces/common.js').SortRequest<import('@clinic/shared').PatientSortField>} sort
+   * @param {import('../interfaces/common.js').SortRequest<import('#shared').PatientSortField>} sort
    */
   async list(filter, page, sort) {
     const q = this.toQuery(filter);

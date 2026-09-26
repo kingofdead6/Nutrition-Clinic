@@ -12,7 +12,7 @@ import type {
   AppointmentUpdateInput,
   AppointmentWithPatient,
   Paginated,
-} from '@clinic/shared';
+} from '@shared';
 import { apiClient } from '../lib/apiClient';
 
 export const APPOINTMENTS_KEY = ['appointments'] as const;

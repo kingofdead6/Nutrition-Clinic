@@ -1,14 +1,14 @@
 import { CRUD_METHODS } from './common.js';
 
-/** @typedef {import('@clinic/shared').Patient} Patient */
-/** @typedef {import('@clinic/shared').PatientStatus} PatientStatus */
+/** @typedef {import('#shared').Patient} Patient */
+/** @typedef {import('#shared').PatientStatus} PatientStatus */
 
 /**
  * @typedef {object} PatientFilter
  * @property {string} [search]  Matched against the normalized name, phone and file number.
  * @property {PatientStatus} [status]
- * @property {import('@clinic/shared').Gender} [gender]
- * @property {import('@clinic/shared').PatientGoal} [goal]
+ * @property {import('#shared').Gender} [gender]
+ * @property {import('#shared').PatientGoal} [goal]
  * @property {boolean} [archived]
  */
 
@@ -17,7 +17,7 @@ import { CRUD_METHODS } from './common.js';
  *   list(
  *     filter: PatientFilter,
  *     page: import('./common.js').PageRequest,
- *     sort: import('./common.js').SortRequest<import('@clinic/shared').PatientSortField>,
+ *     sort: import('./common.js').SortRequest<import('#shared').PatientSortField>,
  *   ): Promise<import('./common.js').ListResult<Patient>>,
  *   findAll(filter?: PatientFilter): Promise<Patient[]>,
  *   nextFileNumber(): Promise<string>,

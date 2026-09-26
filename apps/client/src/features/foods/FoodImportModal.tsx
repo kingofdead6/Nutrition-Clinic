@@ -1,7 +1,7 @@
 import { FileUp } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { FoodImportResult } from '@clinic/shared';
+import type { FoodImportResult } from '@shared';
 import { useImportFoods } from '../../api/foods';
 import { Button } from '../../components/ui/Button';
 import { Modal } from '../../components/ui/Modal';

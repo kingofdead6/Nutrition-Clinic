@@ -1,6 +1,6 @@
 import request from 'supertest';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { addDays, todayIn } from '@clinic/shared';
+import { addDays, todayIn } from '#shared';
 import { createTestApp, setupAdmin, TINY_PNG } from './helpers.js';
 
 /** @type {Awaited<ReturnType<typeof createTestApp>>} */

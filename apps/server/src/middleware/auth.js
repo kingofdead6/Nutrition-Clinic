@@ -2,8 +2,8 @@ import { forbidden, unauthenticated } from '../lib/errors.js';
 import { SESSION_COOKIE, verifySession } from '../lib/session.js';
 import { toPublicUser } from '../services/userService.js';
 
-/** @typedef {import('@clinic/shared').User} User */
-/** @typedef {import('@clinic/shared').UserRole} UserRole */
+/** @typedef {import('#shared').User} User */
+/** @typedef {import('#shared').UserRole} UserRole */
 
 /**
  * Requires a valid session cookie for an active user whose tokenVersion still matches

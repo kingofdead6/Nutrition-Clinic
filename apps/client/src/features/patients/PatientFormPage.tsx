@@ -12,7 +12,7 @@ import {
   patientCreateSchema,
   type Patient,
   type PatientCreateFormValues,
-} from '@clinic/shared';
+} from '@shared';
 import { useCreatePatient, usePatient, useUpdatePatient } from '../../api/patients';
 import { Button, ButtonLink } from '../../components/ui/Button';
 import { Card, CardTitle } from '../../components/ui/Card';

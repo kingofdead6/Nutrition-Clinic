@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import type { DietPlan } from '@clinic/shared';
+import type { DietPlan } from '@shared';
 import { cn } from '../../lib/cn';
 import { useClinicToday } from '../../lib/useClinicToday';
 import { planStatus, type PlanStatus } from './planStatus';

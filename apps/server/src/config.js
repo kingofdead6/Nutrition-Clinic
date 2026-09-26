@@ -1,6 +1,6 @@
 import path from 'node:path';
 import { z } from 'zod';
-import { DB_DRIVERS } from '@clinic/shared';
+import { DB_DRIVERS } from '#shared';
 
 const DEV_JWT_SECRET = 'dev-only-insecure-secret-change-me-0123456789';
 

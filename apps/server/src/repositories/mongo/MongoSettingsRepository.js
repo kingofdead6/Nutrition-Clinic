@@ -1,6 +1,6 @@
 import { MongoCrudRepository } from './MongoCrudRepository.js';
 
-/** @typedef {import('@clinic/shared').ClinicSettings} ClinicSettings */
+/** @typedef {import('#shared').ClinicSettings} ClinicSettings */
 
 /**
  * @extends {MongoCrudRepository<ClinicSettings>}

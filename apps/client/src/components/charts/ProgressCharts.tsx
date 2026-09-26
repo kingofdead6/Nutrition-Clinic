@@ -12,7 +12,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import { formatDateOnly, type ProgressPoint } from '@clinic/shared';
+import { formatDateOnly, type ProgressPoint } from '@shared';
 import { CHART } from './tokens';
 
 const shortDate = (date: string) => formatDateOnly(date).slice(5); // MM/dd

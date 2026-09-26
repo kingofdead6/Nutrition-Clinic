@@ -1,4 +1,4 @@
-import { DEFAULT_SETTINGS, todayIn } from '@clinic/shared';
+import { DEFAULT_SETTINGS, todayIn } from '@shared';
 import { useAuthStatus } from '../api/auth';
 
 /** Today (`YYYY-MM-DD`) in the clinic's timezone, e.g. for ages and date limits. */

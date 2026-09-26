@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { dayTotals, formatDateOnly } from '@clinic/shared';
+import { dayTotals, formatDateOnly } from '@shared';
 import { usePatientPlans } from '../../api/dietPlans';
 import { ButtonLink } from '../../components/ui/Button';
 import { Card, CardTitle } from '../../components/ui/Card';

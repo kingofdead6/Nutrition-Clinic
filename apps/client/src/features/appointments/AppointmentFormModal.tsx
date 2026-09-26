@@ -10,7 +10,7 @@ import {
   formatDateOnly,
   type AppointmentConflictDetails,
   type AppointmentWithPatient,
-} from '@clinic/shared';
+} from '@shared';
 import {
   useCreateAppointment,
   useDeleteAppointment,

@@ -16,9 +16,9 @@ import {
   timeToMinutes,
   todayIn,
   weekdayOf,
-} from '@clinic/shared';
+} from '#shared';
 
-/** @typedef {import('@clinic/shared').PatientGoal} PatientGoal */
+/** @typedef {import('#shared').PatientGoal} PatientGoal */
 
 export const SEED_ADMIN = {
   email: 'admin@clinic.local',

@@ -1,4 +1,4 @@
-/** @typedef {import('@clinic/shared').ClinicSettings} ClinicSettings */
+/** @typedef {import('#shared').ClinicSettings} ClinicSettings */
 
 /**
  * Singleton clinic settings record.

@@ -1,8 +1,8 @@
 import { randomUUID } from 'node:crypto';
-import { computePatientStatus, todayIn } from '@clinic/shared';
+import { computePatientStatus, todayIn } from '#shared';
 import { fieldError, notFound } from '../lib/errors.js';
 
-/** @typedef {import('@clinic/shared').Patient} Patient */
+/** @typedef {import('#shared').Patient} Patient */
 
 /**
  * @param {import('../context.js').AppContext} ctx
@@ -67,7 +67,7 @@ export function createPatientService({ repositories, storage, logger, now }, { s
   return {
     refresh,
 
-    /** @param {import('@clinic/shared').PatientListQuery} q */
+    /** @param {import('#shared').PatientListQuery} q */
     async list(q) {
       const { items, total } = await patients.list(
         {
@@ -85,7 +85,7 @@ export function createPatientService({ repositories, storage, logger, now }, { s
 
     get: getOrThrow,
 
-    /** @param {import('@clinic/shared').PatientCreateInput} input */
+    /** @param {import('#shared').PatientCreateInput} input */
     async create(input) {
       const timezone = await clinicTimezone();
       assertBirthDate(input.birthDate, todayIn(timezone, now()));
@@ -96,7 +96,7 @@ export function createPatientService({ repositories, storage, logger, now }, { s
         photoPath: null,
         archived: false,
         lastVisitDate: null,
-        status: /** @type {import('@clinic/shared').PatientStatus} */ ('follow_up'),
+        status: /** @type {import('#shared').PatientStatus} */ ('follow_up'),
       };
       draft.status = statusFor(
         { ...draft, id: '', createdAt: new Date().toISOString(), updatedAt: '' },
@@ -108,7 +108,7 @@ export function createPatientService({ repositories, storage, logger, now }, { s
 
     /**
      * @param {string} id
-     * @param {import('@clinic/shared').PatientUpdateInput} patch
+     * @param {import('#shared').PatientUpdateInput} patch
      */
     async update(id, patch) {
       const current = await getOrThrow(id);

@@ -1,4 +1,4 @@
-/** @typedef {import('@clinic/shared').ErrorCode} ErrorCode */
+/** @typedef {import('#shared').ErrorCode} ErrorCode */
 
 /** @type {Record<ErrorCode, number>} */
 const STATUS_BY_CODE = {

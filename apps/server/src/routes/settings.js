@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import { clinicSettingsUpdateSchema } from '@clinic/shared';
+import { clinicSettingsUpdateSchema } from '#shared';
 import { imageUpload, mimeForKey, requireImage } from '../lib/upload.js';
 import { parseBody } from '../lib/validate.js';
 import { authenticate, requireRole } from '../middleware/auth.js';
 import { logoUrlFor } from '../services/settingsService.js';
 
 /**
- * @param {import('@clinic/shared').ClinicSettings} settings
+ * @param {import('#shared').ClinicSettings} settings
  */
 const withLogoUrl = (settings) => ({ ...settings, logoUrl: logoUrlFor(settings) });
 

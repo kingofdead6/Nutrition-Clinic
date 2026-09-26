@@ -1,4 +1,4 @@
-import { PATIENT_STATUSES, roundTo, todayIn } from '@clinic/shared';
+import { PATIENT_STATUSES, roundTo, todayIn } from '#shared';
 
 /**
  * Dashboard figures, computed in the service layer from plain repository reads so every
@@ -30,7 +30,7 @@ export function createDashboardService({ repositories, now }, { settings }) {
   }
 
   return {
-    /** @returns {Promise<import('@clinic/shared').DashboardStats>} */
+    /** @returns {Promise<import('#shared').DashboardStats>} */
     async stats() {
       const tz = (await settings.get()).timezone;
       const today = todayIn(tz, now());
@@ -54,7 +54,7 @@ export function createDashboardService({ repositories, now }, { settings }) {
       const lost = averageChange(weights, loss, -1);
       const gained = averageChange(weights, gain, 1);
 
-      const byStatus = /** @type {Record<import('@clinic/shared').PatientStatus, number>} */ (
+      const byStatus = /** @type {Record<import('#shared').PatientStatus, number>} */ (
         Object.fromEntries(PATIENT_STATUSES.map((s) => [s, 0]))
       );
       for (const p of patients) byStatus[p.status] += 1;

@@ -1,7 +1,7 @@
 import { LayoutTemplate, Plus, UtensilsCrossed } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { formatDateOnly, type DietPlanWithPatient } from '@clinic/shared';
+import { formatDateOnly, type DietPlanWithPatient } from '@shared';
 import { useDietPlans } from '../../api/dietPlans';
 import { ButtonLink } from '../../components/ui/Button';
 import { Card } from '../../components/ui/Card';

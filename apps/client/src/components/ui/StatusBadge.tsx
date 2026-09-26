@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import type { AppointmentStatus, PatientStatus } from '@clinic/shared';
+import type { AppointmentStatus, PatientStatus } from '@shared';
 import { cn } from '../../lib/cn';
 
 type Tone = 'green' | 'blue' | 'orange' | 'yellow' | 'red' | 'gray';

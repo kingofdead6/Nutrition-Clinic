@@ -2,7 +2,7 @@ import { ZodError } from 'zod';
 import { AppError } from '../lib/errors.js';
 import { DuplicateKeyError } from '../repositories/errors.js';
 
-/** @typedef {import('@clinic/shared').ApiErrorBody} ApiErrorBody */
+/** @typedef {import('#shared').ApiErrorBody} ApiErrorBody */
 
 /**
  * Maps any thrown value to an HTTP status and the standard error body.

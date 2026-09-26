@@ -1,4 +1,4 @@
-import type { Patient } from '@clinic/shared';
+import type { Patient } from '@shared';
 import { patientPhotoUrl } from '../../api/patients';
 import female from '../../assets/avatar-female.svg';
 import male from '../../assets/avatar-male.svg';

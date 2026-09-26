@@ -10,7 +10,7 @@ import {
   PATIENT_STATUSES,
   type Patient,
   type PatientSortField,
-} from '@clinic/shared';
+} from '@shared';
 import { usePatients, type PatientListParams } from '../../api/patients';
 import { ButtonLink } from '../../components/ui/Button';
 import { Card } from '../../components/ui/Card';

@@ -26,16 +26,17 @@ npm run dev
 
 ## Scripts (run from the repo root)
 
-| Script                            | What it does                                                                                                |
-| --------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `npm run dev`                     | Shared package (tsup watch), server (`nodemon index.js`) and client (Vite) via `concurrently`               |
-| `npm run build`                   | Builds `packages/shared/dist` and `apps/client/dist`. The server is plain JS and needs no build             |
-| `npm start`                       | `node index.js` in `apps/server`. Set `CLIENT_DIST_DIR=../client/dist` to serve the UI from the same origin |
-| `npm test`                        | Vitest in every workspace (server tests use an in-memory MongoDB)                                           |
-| `npm run typecheck`               | `tsc` (strict) for the shared package and the client                                                        |
-| `npm run lint` / `npm run format` | ESLint (flat config) / Prettier                                                                             |
-| `npm run seed`                    | Fill an **empty** database with the demo clinic (`-- --force` wipes the configured database first)          |
-| `npm run backup -- …`             | Backup / restore from the command line, see [Backup and restore](#backup-and-restore)                       |
+| Script                            | What it does                                                                                                   |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `npm run dev`                     | Server (`nodemon index.js`) and client (Vite) via `concurrently`                                               |
+| `npm run sync:shared`             | Regenerates `apps/server/src/shared` (JS) from `apps/client/src/shared` (TS). Run it after editing shared code |
+| `npm run build`                   | Builds `apps/client/dist`. The server is plain JS and needs no build                                           |
+| `npm start`                       | `node index.js` in `apps/server`. Set `CLIENT_DIST_DIR=../client/dist` to serve the UI from the same origin    |
+| `npm test`                        | Vitest in every workspace (server tests use an in-memory MongoDB)                                              |
+| `npm run typecheck`               | `tsc` (strict) for the client, including its shared code                                                       |
+| `npm run lint` / `npm run format` | ESLint (flat config) / Prettier                                                                                |
+| `npm run seed`                    | Fill an **empty** database with the demo clinic (`-- --force` wipes the configured database first)             |
+| `npm run backup -- …`             | Backup / restore from the command line, see [Backup and restore](#backup-and-restore)                          |
 
 ## Environment variables
 
@@ -144,6 +145,8 @@ in [render.yaml](render.yaml). Use Render → New → Blueprint, or copy them in
 ```
 apps/
   client/            React 18 + Vite + Tailwind (RTL) + TanStack Query + react-i18next
+    src/shared/        code shared with the server, in TypeScript: zod schemas, types, enums,
+                       constants, helpers (+ their tests). Imported as `@shared`. EDIT HERE
   server/            Express 5 + zod + pino, plain JavaScript (ESM, JSDoc types)
     index.js           run file: load env → startServer
     src/app.js         createApp({ repositories, config }) → Express app (no listen, no connect)
@@ -153,11 +156,12 @@ apps/
       mongo/           the only code that imports mongoose
       sqlite/          placeholder (README) for the desktop driver
       index.js         createRepositories(config) picks the driver from DB_DRIVER
+    src/shared/        GENERATED JavaScript copy of client/src/shared (+ .d.ts), imported as
+                       `#shared` (package.json "imports"). Do not edit: run `npm run sync:shared`
     src/storage/       StorageAdapter + LocalFileStorage (DATA_DIR)
     test/contract/     driver-agnostic repository test suite
-packages/
-  shared/            TypeScript: zod schemas, types, enums, constants, helpers. Built to dist/ for the
-                     server; the client imports src/ directly ("source" export condition)
+scripts/
+  sync-shared.mjs    writes server/src/shared from client/src/shared; `--check` fails on drift (npm test)
 ```
 
 Key rules:
@@ -216,7 +220,7 @@ npm run backup -- import path/to/backup.zip --yes  # replaces all data (safety b
 ## Tests
 
 ```bash
-npm test          # shared helpers + server (API, services, repository contract, backup, seed)
+npm test          # drift check of the shared copy + shared helpers (client) + server (API, services, repository contract, backup, seed)
 ```
 
 - Server tests start one in-memory MongoDB (`mongodb-memory-server`). Each test file gets its
@@ -309,8 +313,8 @@ dialog, map them to `webContents.print()`, or `printToPDF()` for "save as PDF".
 
 ### 6. Packaging
 
-- **electron-builder**. Bundle `apps/server` (plain JS, with no build step), `packages/shared/dist`
-  and `apps/client/dist` (as `extraResources/client`).
+- **electron-builder**. Bundle `apps/server` (plain JS, with no build step, including its
+  generated `src/shared`) and `apps/client/dist` (as `extraResources/client`).
 - `better-sqlite3` is a native module: rebuild it for Electron's Node ABI with
   `electron-rebuild` (or electron-builder's `npmRebuild`), and ship Mongo-free (`mongoose` is
   only loaded by the mongo driver, through a dynamic import).

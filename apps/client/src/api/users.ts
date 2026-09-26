@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import type { User, UserCreateInput, UserUpdateInput } from '@clinic/shared';
+import type { User, UserCreateInput, UserUpdateInput } from '@shared';
 import { apiClient } from '../lib/apiClient';
 
 export const USERS_KEY = ['users'] as const;

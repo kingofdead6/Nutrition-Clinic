@@ -11,7 +11,7 @@ import type {
   PatientCreateInput,
   PatientListQuery,
   PatientUpdateInput,
-} from '@clinic/shared';
+} from '@shared';
 import { apiClient } from '../lib/apiClient';
 
 export const PATIENTS_KEY = ['patients'] as const;

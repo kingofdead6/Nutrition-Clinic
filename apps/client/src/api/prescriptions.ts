@@ -9,7 +9,7 @@ import type {
   PrescriptionTemplateUpdateInput,
   PrescriptionUpdateInput,
   PrescriptionWithPatient,
-} from '@clinic/shared';
+} from '@shared';
 import { apiClient } from '../lib/apiClient';
 
 export const RX_KEY = ['prescriptions'] as const;

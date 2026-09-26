@@ -1,5 +1,5 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
-import type { PatientReport, ReportRangeQuery, ReportsOverview } from '@clinic/shared';
+import type { PatientReport, ReportRangeQuery, ReportsOverview } from '@shared';
 import { apiClient } from '../lib/apiClient';
 
 export const REPORTS_KEY = ['reports'] as const;

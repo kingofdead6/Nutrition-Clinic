@@ -1,8 +1,8 @@
-import { planEndDate, planItemFromFood } from '@clinic/shared';
+import { planEndDate, planItemFromFood } from '#shared';
 import { AppError, fieldError, notFound } from '../lib/errors.js';
 
-/** @typedef {import('@clinic/shared').DietPlan} DietPlan */
-/** @typedef {import('@clinic/shared').DietPlanWithPatient} DietPlanWithPatient */
+/** @typedef {import('#shared').DietPlan} DietPlan */
+/** @typedef {import('#shared').DietPlanWithPatient} DietPlanWithPatient */
 
 /**
  * @param {import('../context.js').AppContext} ctx
@@ -39,7 +39,7 @@ export function createDietPlanService({ repositories }, { patients }) {
   /**
    * Turns client items ({ foodId, quantity }) into snapshotted items with the food's
    * name, unit and nutrition. The unit is always the food's own serving unit.
-   * @param {import('@clinic/shared').DietPlanCreateInput['days']} days
+   * @param {import('#shared').DietPlanCreateInput['days']} days
    * @returns {Promise<DietPlan['days']>}
    */
   async function resolveDays(days) {
@@ -76,7 +76,7 @@ export function createDietPlanService({ repositories }, { patients }) {
     patientId ? patients.refresh(patientId).then(() => undefined) : Promise.resolve();
 
   return {
-    /** @param {import('@clinic/shared').DietPlanListQuery} q */
+    /** @param {import('#shared').DietPlanListQuery} q */
     async list(q) {
       const { items, total } = await repo.list(
         { patientId: q.patientId, isTemplate: q.isTemplate, isActive: q.isActive },
@@ -96,7 +96,7 @@ export function createDietPlanService({ repositories }, { patients }) {
       return joined(await getOrThrow(id));
     },
 
-    /** @param {import('@clinic/shared').DietPlanCreateInput} input */
+    /** @param {import('#shared').DietPlanCreateInput} input */
     async create(input) {
       const { activate, ...fields } = input;
       const patientId = fields.isTemplate ? null : fields.patientId;
@@ -114,7 +114,7 @@ export function createDietPlanService({ repositories }, { patients }) {
 
     /**
      * @param {string} id
-     * @param {import('@clinic/shared').DietPlanUpdateInput} patch
+     * @param {import('#shared').DietPlanUpdateInput} patch
      */
     async update(id, patch) {
       const current = await getOrThrow(id);
@@ -165,7 +165,7 @@ export function createDietPlanService({ repositories }, { patients }) {
      * Copies a plan (meals keep their snapshots): same patient, another patient
      * (e.g. applying a template), or as a template.
      * @param {string} id
-     * @param {import('@clinic/shared').DietPlanDuplicateInput} options
+     * @param {import('#shared').DietPlanDuplicateInput} options
      */
     async duplicate(id, options) {
       const source = await getOrThrow(id);

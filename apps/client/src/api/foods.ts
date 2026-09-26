@@ -6,7 +6,7 @@ import type {
   FoodListQuery,
   FoodUpdateInput,
   Paginated,
-} from '@clinic/shared';
+} from '@shared';
 import { apiClient } from '../lib/apiClient';
 
 export const FOODS_KEY = ['foods'] as const;

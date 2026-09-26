@@ -1,10 +1,10 @@
-import { ageOn, fillPlaceholders, formatDateOnly, todayIn } from '@clinic/shared';
+import { ageOn, fillPlaceholders, formatDateOnly, todayIn } from '#shared';
 import { fieldError, notFound } from '../lib/errors.js';
 import { sanitizeRichText } from '../lib/sanitize.js';
 import { defaultPrescriptionTemplates } from '../data/defaultPrescriptionTemplates.js';
 
-/** @typedef {import('@clinic/shared').Prescription} Prescription */
-/** @typedef {import('@clinic/shared').PrescriptionWithPatient} PrescriptionWithPatient */
+/** @typedef {import('#shared').Prescription} Prescription */
+/** @typedef {import('#shared').PrescriptionWithPatient} PrescriptionWithPatient */
 
 /**
  * Templates and issued prescriptions. Issuing renders the template's placeholders with
@@ -59,8 +59,8 @@ export function createPrescriptionService({ repositories, now }, { settings }) {
   /**
    * Renders a template for a patient: the chosen plan, or the patient's active plan,
    * provides calories and the plan title; the latest visit provides weight/height/BMI.
-   * @param {import('@clinic/shared').PrescriptionCreateInput} input
-   * @returns {Promise<import('@clinic/shared').PrescriptionPreview & { templateId: string, dietPlanId: string | null }>}
+   * @param {import('#shared').PrescriptionCreateInput} input
+   * @returns {Promise<import('#shared').PrescriptionPreview & { templateId: string, dietPlanId: string | null }>}
    */
   async function render(input) {
     const [patient, tpl, clinic] = await Promise.all([
@@ -72,7 +72,7 @@ export function createPrescriptionService({ repositories, now }, { settings }) {
     const today = todayIn(clinic.timezone, now());
     const date = input.date ?? today;
 
-    /** @type {import('@clinic/shared').DietPlan | null} */
+    /** @type {import('#shared').DietPlan | null} */
     let plan;
     if (input.dietPlanId) {
       plan = await repositories.dietPlans.findById(input.dietPlanId);
@@ -119,19 +119,19 @@ export function createPrescriptionService({ repositories, now }, { settings }) {
     listTemplates: () => templates.listAll(),
     getTemplate,
 
-    /** @param {import('@clinic/shared').PrescriptionTemplateCreateInput} input */
+    /** @param {import('#shared').PrescriptionTemplateCreateInput} input */
     createTemplate(input) {
       return templates.create({ ...input, bodyRichText: sanitizeRichText(input.bodyRichText) });
     },
 
-    /** @param {string} id @param {import('@clinic/shared').PrescriptionTemplateUpdateInput} patch */
+    /** @param {string} id @param {import('#shared').PrescriptionTemplateUpdateInput} patch */
     async updateTemplate(id, patch) {
       await getTemplate(id);
       const clean =
         patch.bodyRichText === undefined
           ? patch
           : { ...patch, bodyRichText: sanitizeRichText(patch.bodyRichText) };
-      return /** @type {import('@clinic/shared').PrescriptionTemplate} */ (
+      return /** @type {import('#shared').PrescriptionTemplate} */ (
         await templates.update(id, clean)
       );
     },
@@ -151,7 +151,7 @@ export function createPrescriptionService({ repositories, now }, { settings }) {
     },
 
     // ---- issued prescriptions ----
-    /** @param {import('@clinic/shared').PrescriptionListQuery} q */
+    /** @param {import('#shared').PrescriptionListQuery} q */
     async list(q) {
       if (q.patientId) {
         const all = await repo.listByPatient(q.patientId);
@@ -186,19 +186,19 @@ export function createPrescriptionService({ repositories, now }, { settings }) {
       return joined(await getOrThrow(id));
     },
 
-    /** Renders without saving. @param {import('@clinic/shared').PrescriptionCreateInput} input */
+    /** Renders without saving. @param {import('#shared').PrescriptionCreateInput} input */
     async preview(input) {
       const { templateId: _t, dietPlanId: _d, ...doc } = await render(input);
       return doc;
     },
 
-    /** @param {import('@clinic/shared').PrescriptionCreateInput} input */
+    /** @param {import('#shared').PrescriptionCreateInput} input */
     async create(input) {
       const doc = await render(input);
       return joined(await repo.create({ ...doc, patientId: input.patientId }));
     },
 
-    /** Edits the issued text before printing (the template is not touched). @param {string} id @param {import('@clinic/shared').PrescriptionUpdateInput} patch */
+    /** Edits the issued text before printing (the template is not touched). @param {string} id @param {import('#shared').PrescriptionUpdateInput} patch */
     async update(id, patch) {
       await getOrThrow(id);
       const clean =

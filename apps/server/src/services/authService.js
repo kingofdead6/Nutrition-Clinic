@@ -15,7 +15,7 @@ export function createAuthService({ repositories, config }, { settings, foods, p
   const rounds = config.auth.bcryptRounds;
 
   return {
-    /** @returns {Promise<import('@clinic/shared').AuthStatus>} */
+    /** @returns {Promise<import('#shared').AuthStatus>} */
     async status() {
       const [userCount, s] = await Promise.all([users.count(), settings.get()]);
       return {
@@ -33,7 +33,7 @@ export function createAuthService({ repositories, config }, { settings, foods, p
 
     /**
      * First run only: creates the admin and the clinic settings.
-     * @param {import('@clinic/shared').SetupInput} input
+     * @param {import('#shared').SetupInput} input
      */
     async setup(input) {
       if ((await users.count()) > 0) throw conflict('errors.setupDone');
@@ -55,7 +55,7 @@ export function createAuthService({ repositories, config }, { settings, foods, p
     },
 
     /**
-     * @param {import('@clinic/shared').LoginInput} input
+     * @param {import('#shared').LoginInput} input
      * @returns {Promise<import('../repositories/interfaces/UserRepository.js').UserRecord>}
      */
     async login(input) {

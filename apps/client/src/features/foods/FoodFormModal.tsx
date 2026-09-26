@@ -7,7 +7,7 @@ import {
   SERVING_UNITS,
   type Food,
   type FoodFormValues,
-} from '@clinic/shared';
+} from '@shared';
 import { useCreateFood, useUpdateFood } from '../../api/foods';
 import { Button } from '../../components/ui/Button';
 import { FormField } from '../../components/ui/FormField';

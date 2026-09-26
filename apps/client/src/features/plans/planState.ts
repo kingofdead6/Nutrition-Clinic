@@ -13,7 +13,7 @@ import {
   type PatientGoal,
   type PlanDayKey,
   type ServingUnit,
-} from '@clinic/shared';
+} from '@shared';
 import type { PatientChoice } from '../appointments/PatientCombobox';
 
 /**

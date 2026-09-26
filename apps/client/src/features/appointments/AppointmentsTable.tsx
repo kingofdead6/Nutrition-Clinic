@@ -6,7 +6,7 @@ import {
   formatDateOnly,
   type AppointmentStatus,
   type AppointmentWithPatient,
-} from '@clinic/shared';
+} from '@shared';
 import { useSetAppointmentStatus } from '../../api/appointments';
 import { Button } from '../../components/ui/Button';
 import { DataTable, type Column, type PaginationState } from '../../components/ui/DataTable';

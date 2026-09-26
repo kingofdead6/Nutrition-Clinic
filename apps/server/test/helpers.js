@@ -22,8 +22,8 @@ export function createTestConfig(overrides = {}) {
 }
 
 /**
- * @param {Partial<import('../src/repositories/interfaces/common.js').NewEntity<import('@clinic/shared').Patient>>} [overrides]
- * @returns {import('../src/repositories/interfaces/common.js').NewEntity<import('@clinic/shared').Patient>}
+ * @param {Partial<import('../src/repositories/interfaces/common.js').NewEntity<import('#shared').Patient>>} [overrides]
+ * @returns {import('../src/repositories/interfaces/common.js').NewEntity<import('#shared').Patient>}
  */
 export function patientFixture(overrides = {}) {
   const firstName = overrides.firstName ?? 'فاطمة';

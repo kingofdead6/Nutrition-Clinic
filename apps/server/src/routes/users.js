@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { idParamsSchema, userCreateSchema, userUpdateSchema } from '@clinic/shared';
+import { idParamsSchema, userCreateSchema, userUpdateSchema } from '#shared';
 import { parseBody, parseParams } from '../lib/validate.js';
 import { authenticate, currentUser, requireRole } from '../middleware/auth.js';
 

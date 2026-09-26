@@ -1,6 +1,6 @@
 import { CRUD_METHODS } from './common.js';
 
-/** @typedef {import('@clinic/shared').PrescriptionTemplate} PrescriptionTemplate */
+/** @typedef {import('#shared').PrescriptionTemplate} PrescriptionTemplate */
 
 /**
  * @typedef {import('./common.js').CrudRepository<PrescriptionTemplate> & {
