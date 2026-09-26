@@ -37,10 +37,14 @@ export function verifySession(token, config) {
 
 /** @param {import('../config.js').AppConfig} config */
 function cookieOptions(config) {
+  const crossSite = config.auth.cookieSameSite === 'none';
   return /** @type {const} */ ({
     httpOnly: true,
-    sameSite: 'strict',
+    sameSite: config.auth.cookieSameSite,
     secure: config.auth.cookieSecure,
+    // Frontend on another site: a partitioned (CHIPS) cookie is still accepted by browsers
+    // that block ordinary third-party cookies.
+    partitioned: crossSite,
     path: '/',
   });
 }

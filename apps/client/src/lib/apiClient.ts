@@ -1,11 +1,13 @@
 import type { ApiErrorBody, ErrorCode } from '@shared';
 
 /**
- * The single entry point for HTTP calls. The base URL comes from VITE_API_URL
- * (default `/api`, proxied by Vite in dev and served same-origin in production/desktop).
- * Auth is an httpOnly cookie, so requests always include credentials.
+ * Where the backend runs (the Render service). To develop against a local server, change
+ * it to `http://localhost:4000/api` (the PORT in apps/server/.env).
  */
-export const API_BASE_URL = (import.meta.env.VITE_API_URL ?? '/api').replace(/\/+$/, '');
+export const API_BASE_URL = 'https://nutrition-clinic-0ay3.onrender.com/api';
+
+// The single entry point for HTTP calls. Auth is an httpOnly cookie set by the API, so
+// every request includes credentials.
 
 export type ApiErrorCode = ErrorCode | 'NETWORK_ERROR';
 

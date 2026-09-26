@@ -11,6 +11,14 @@ import { startServer } from './src/server.js';
 const config = loadConfig();
 const logger = createLogger(config);
 
+if (config.cors.ignoredWildcard) {
+  logger.warn('CORS_ORIGIN "*" is ignored: list the frontend address(es) instead');
+}
+logger.info(
+  { allowedOrigins: config.cors.origins, cookieSameSite: config.auth.cookieSameSite },
+  'Browser access',
+);
+
 if (config.auth.usingDevSecret) {
   logger.warn('JWT_SECRET is not set: using the insecure development secret');
 }

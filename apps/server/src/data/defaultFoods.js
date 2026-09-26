@@ -136,17 +136,30 @@ const ROWS = [
 
 /** @returns {import('../repositories/interfaces/common.js').NewEntity<import('#shared').Food>[]} */
 export function defaultFoods() {
-  return ROWS.map(([name, nameFr, category, servingSize, servingUnit, calories, proteinG, carbsG, fatG, fiberG]) => ({
-    name,
-    nameFr,
-    category,
-    servingSize,
-    servingUnit,
-    calories,
-    proteinG,
-    carbsG,
-    fatG,
-    fiberG,
-    isCustom: false,
-  }));
+  return ROWS.map(
+    ([
+      name,
+      nameFr,
+      category,
+      servingSize,
+      servingUnit,
+      calories,
+      proteinG,
+      carbsG,
+      fatG,
+      fiberG,
+    ]) => ({
+      name,
+      nameFr,
+      category,
+      servingSize,
+      servingUnit,
+      calories,
+      proteinG,
+      carbsG,
+      fatG,
+      fiberG,
+      isCustom: false,
+    }),
+  );
 }

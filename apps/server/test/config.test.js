@@ -20,10 +20,33 @@ describe('loadConfig', () => {
   });
 
   it('parses CORS origins and booleans', () => {
-    const c = loadConfig({ CORS_ORIGIN: 'http://a, http://b', COOKIE_SECURE: 'true', PORT: '0' });
-    expect(c.cors.origins).toEqual(['http://a', 'http://b']);
+    const c = loadConfig({ CORS_ORIGIN: 'http://a, http://b/', COOKIE_SECURE: 'true', PORT: '0' });
+    expect(c.cors.origins).toEqual([
+      'https://nutrition-clinic-client.vercel.app',
+      'http://localhost:5173',
+      'http://a',
+      'http://b',
+    ]);
     expect(c.auth.cookieSecure).toBe(true);
+    expect(c.auth.cookieSameSite).toBe('strict');
     expect(c.port).toBe(0);
+  });
+
+  it('ignores a "*" origin (unsafe with cookie auth)', () => {
+    const c = loadConfig({ CORS_ORIGIN: '*' });
+    expect(c.cors).toEqual({
+      origins: ['https://nutrition-clinic-client.vercel.app', 'http://localhost:5173'],
+      ignoredWildcard: true,
+    });
+  });
+
+  it('on Render: cross-site Secure cookie and a trusted proxy, unless overridden', () => {
+    const c = loadConfig({ RENDER: 'true' });
+    expect(c.auth).toMatchObject({ cookieSameSite: 'none', cookieSecure: true });
+    expect(c.trustProxy).toBe(true);
+    const same = loadConfig({ RENDER: 'true', COOKIE_SAMESITE: 'strict', TRUST_PROXY: 'false' });
+    expect(same.auth).toMatchObject({ cookieSameSite: 'strict', cookieSecure: false });
+    expect(same.trustProxy).toBe(false);
   });
 
   it('requires a JWT secret in production', () => {

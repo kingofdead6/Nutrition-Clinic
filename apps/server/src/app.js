@@ -8,6 +8,7 @@ import helmet from 'helmet';
 import { pinoHttp } from 'pino-http';
 import { createLogger } from './lib/logger.js';
 import { errorHandler } from './middleware/errorHandler.js';
+import { originCheck } from './middleware/originCheck.js';
 import { apiRouter } from './routes/index.js';
 import { createServices } from './services/index.js';
 import { LocalFileStorage } from './storage/LocalFileStorage.js';
@@ -53,9 +54,19 @@ export function createApp({ repositories, config, storage, logger, now }) {
         },
       },
       crossOriginEmbedderPolicy: false,
+      // The frontend may be on another site and loads photos / the logo from the API.
+      crossOriginResourcePolicy: { policy: 'cross-origin' },
     }),
   );
-  app.use(cors({ origin: config.cors.origins, credentials: true }));
+  app.use(
+    cors({
+      origin: config.cors.origins,
+      credentials: true,
+      // Lets the frontend read download file names (backups) across origins.
+      exposedHeaders: ['Content-Disposition'],
+    }),
+  );
+  app.use('/api', originCheck(config.cors.origins));
   app.use(compression());
   app.use(
     pinoHttp({

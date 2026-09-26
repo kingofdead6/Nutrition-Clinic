@@ -2,6 +2,11 @@ import path from 'node:path';
 import { z } from 'zod';
 import { DB_DRIVERS } from '#shared';
 
+/**
+ * Frontends that may always use the API with the session cookie: the deployed site
+ * (Vercel) and the Vite dev server. CORS_ORIGIN can add more.
+ */
+const CLIENT_ORIGINS = ['https://nutrition-clinic-client.vercel.app', 'http://localhost:5173'];
 const DEV_JWT_SECRET = 'dev-only-insecure-secret-change-me-0123456789';
 
 const booleanFromEnv = z
@@ -25,8 +30,12 @@ const envSchema = z.object({
   UPLOADS_DIR: z.string().optional(),
   BACKUP_DIR: z.string().optional(),
 
-  /** Comma-separated list of allowed browser origins (dev: the Vite server). */
-  CORS_ORIGIN: z.string().default('http://localhost:5173'),
+  /**
+   * Comma-separated browser origins allowed to call the API with the session cookie (the
+   * frontend's address). The local Vite dev server is always allowed. `*` is ignored: with
+   * cookie auth it would let any website act as the signed-in user.
+   */
+  CORS_ORIGIN: z.string().default(''),
   /** When set, the server also serves the built client from this folder (single origin). */
   CLIENT_DIST_DIR: z.string().optional(),
 
@@ -42,8 +51,13 @@ const envSchema = z.object({
   LOGIN_RATE_LIMIT_WINDOW_MIN: z.coerce.number().int().min(1).default(15),
   /** bcrypt cost factor (tests lower it for speed). */
   BCRYPT_ROUNDS: z.coerce.number().int().min(4).max(15).default(12),
-  COOKIE_SECURE: booleanFromEnv.default(false),
-  TRUST_PROXY: booleanFromEnv.default(false),
+  COOKIE_SECURE: booleanFromEnv.optional(),
+  /**
+   * strict: frontend and API on the same site. none: frontend on another site (the cookie
+   * is then also Secure and Partitioned). Default: none on Render, strict elsewhere.
+   */
+  COOKIE_SAMESITE: z.enum(['strict', 'lax', 'none']).optional(),
+  TRUST_PROXY: booleanFromEnv.optional(),
 
   LOG_LEVEL: z.enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace', 'silent']).default('info'),
   LOG_PRETTY: booleanFromEnv.optional(),
@@ -80,6 +94,9 @@ export function loadConfig(source = process.env, baseDir = process.cwd()) {
     throw new Error('Invalid configuration: JWT_SECRET (≥32 chars) is required in production');
   }
 
+  const hosted = Boolean(source.RENDER);
+  const sameSite = e.COOKIE_SAMESITE ?? (hosted ? 'none' : 'strict');
+
   /** @param {string} p */
   const resolve = (p) => path.resolve(baseDir, p);
   const dataDir = resolve(e.DATA_DIR);
@@ -101,20 +118,29 @@ export function loadConfig(source = process.env, baseDir = process.cwd()) {
       clientDistDir: e.CLIENT_DIST_DIR ? resolve(e.CLIENT_DIST_DIR) : null,
     },
     cors: {
-      origins: e.CORS_ORIGIN.split(',')
-        .map((o) => o.trim())
-        .filter(Boolean),
+      origins: [
+        ...new Set([
+          ...CLIENT_ORIGINS,
+          ...e.CORS_ORIGIN.split(',')
+            .map((o) => o.trim().replace(/\/+$/, ''))
+            .filter((o) => o && o !== '*'),
+        ]),
+      ],
+      ignoredWildcard: e.CORS_ORIGIN.split(',').some((o) => o.trim() === '*'),
     },
     auth: {
       jwtSecret: e.JWT_SECRET ?? DEV_JWT_SECRET,
       jwtExpiresInHours: e.JWT_EXPIRES_IN_HOURS,
-      cookieSecure: e.COOKIE_SECURE,
+      cookieSameSite: sameSite,
+      // Browsers only accept SameSite=None cookies when they are Secure.
+      cookieSecure: sameSite === 'none' ? true : (e.COOKIE_SECURE ?? false),
       bcryptRounds: e.BCRYPT_ROUNDS,
       loginRateLimit: { max: e.LOGIN_RATE_LIMIT_MAX, windowMin: e.LOGIN_RATE_LIMIT_WINDOW_MIN },
       /** True when running on the built-in dev secret (warn loudly). */
       usingDevSecret: !e.JWT_SECRET,
     },
-    trustProxy: e.TRUST_PROXY,
+    // Render (and similar hosts) sit behind one proxy hop.
+    trustProxy: e.TRUST_PROXY ?? hosted,
     log: {
       level: e.NODE_ENV === 'test' ? 'silent' : e.LOG_LEVEL,
       pretty: e.LOG_PRETTY ?? e.NODE_ENV === 'development',

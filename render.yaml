@@ -20,8 +20,9 @@ services:
         value: ../client/dist
       - key: TRUST_PROXY
         value: true
-      - key: COOKIE_SECURE
-        value: true
+      # Frontend address(es), e.g. https://my-clinic.vercel.app (the Vercel site and localhost:5173 are always allowed).
+      - key: CORS_ORIGIN
+        sync: false
       - key: JWT_SECRET
         generateValue: true
       # Set in the dashboard (MongoDB Atlas connection string).

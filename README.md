@@ -16,12 +16,13 @@ today and is built to become a **fully offline desktop app** (Electron + SQLite)
 ```bash
 npm install
 cp apps/server/.env.example apps/server/.env     # then adjust if needed
-cp apps/client/.env.example apps/client/.env     # optional
 npm run seed                                     # optional: demo clinic (empty database only)
 npm run dev
 ```
 
-- Client: http://localhost:5173 (Vite; `/api` is proxied to the server)
+- Client: http://localhost:5173 (Vite). It calls the API address set in
+  `apps/client/src/lib/apiClient.ts` (`API_BASE_URL`, the Render backend). To work against a local
+  server, change it to `http://localhost:4000/api`.
 - API: http://127.0.0.1:4000/api/health (the `PORT` in `apps/server/.env`; the Vite proxy follows it)
 
 ## Scripts (run from the repo root)
@@ -42,24 +43,25 @@ npm run dev
 
 **Server** (`apps/server/.env`, see `.env.example`):
 
-| Variable                                    | Default                                      | Notes                                                                                                              |
-| ------------------------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `HOST` / `PORT`                             | `127.0.0.1` / `4000`                         | `HOST` becomes `0.0.0.0` on Render (`RENDER` set) or with `NODE_ENV=production`. `PORT=0` picks a random free port |
-| `DB_DRIVER`                                 | `mongo`                                      | `mongo` \| `sqlite` (sqlite: not implemented yet)                                                                  |
-| `MONGO_URI`                                 | `mongodb://127.0.0.1:27017/nutrition_clinic` |                                                                                                                    |
-| `SQLITE_PATH`                               | `<DATA_DIR>/clinic.db`                       | future desktop driver                                                                                              |
-| `DATA_DIR`                                  | `./data`                                     | root for uploads, backups, local DB                                                                                |
-| `UPLOADS_DIR` / `BACKUP_DIR`                | `<DATA_DIR>/uploads` / `<DATA_DIR>/backups`  |                                                                                                                    |
-| `CLIENT_DIST_DIR`                           | _(unset)_                                    | serve the built client from the API server                                                                         |
-| `CORS_ORIGIN`                               | `http://localhost:5173`                      | comma-separated exact origins. `*` does not work with cookie auth (unused in dev: the Vite proxy is same-origin)   |
-| `JWT_SECRET`                                | dev fallback                                 | **required in production** (≥ 32 chars)                                                                            |
-| `JWT_EXPIRES_IN_HOURS`                      | `168`                                        |                                                                                                                    |
-| `COOKIE_SECURE` / `TRUST_PROXY`             | `false`                                      |                                                                                                                    |
-| `LOG_LEVEL` / `LOG_PRETTY`                  | `info` / on in dev                           | pino                                                                                                               |
-| `MONGOMS_SYSTEM_BINARY` / `MONGOMS_VERSION` | _(unset)_                                    | tests: use the installed `mongod` instead of downloading one                                                       |
+| Variable                                    | Default                                      | Notes                                                                                                                                                                                                                    |
+| ------------------------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `HOST` / `PORT`                             | `127.0.0.1` / `4000`                         | `HOST` becomes `0.0.0.0` on Render (`RENDER` set) or with `NODE_ENV=production`. `PORT=0` picks a random free port                                                                                                       |
+| `DB_DRIVER`                                 | `mongo`                                      | `mongo` \| `sqlite` (sqlite: not implemented yet)                                                                                                                                                                        |
+| `MONGO_URI`                                 | `mongodb://127.0.0.1:27017/nutrition_clinic` |                                                                                                                                                                                                                          |
+| `SQLITE_PATH`                               | `<DATA_DIR>/clinic.db`                       | future desktop driver                                                                                                                                                                                                    |
+| `DATA_DIR`                                  | `./data`                                     | root for uploads, backups, local DB                                                                                                                                                                                      |
+| `UPLOADS_DIR` / `BACKUP_DIR`                | `<DATA_DIR>/uploads` / `<DATA_DIR>/backups`  |                                                                                                                                                                                                                          |
+| `CLIENT_DIST_DIR`                           | _(unset)_                                    | serve the built client from the API server                                                                                                                                                                               |
+| `CORS_ORIGIN`                               | _(empty)_                                    | comma-separated frontend addresses allowed to use the API with the session cookie. `https://nutrition-clinic-client.vercel.app` and `http://localhost:5173` are always allowed. `*` is ignored (unsafe with cookie auth) |
+| `JWT_SECRET`                                | dev fallback                                 | **required in production** (≥ 32 chars)                                                                                                                                                                                  |
+| `JWT_EXPIRES_IN_HOURS`                      | `168`                                        |                                                                                                                                                                                                                          |
+| `COOKIE_SAMESITE`                           | `none` on Render, else `strict`              | `none` = frontend on another site (cookie becomes `Secure; Partitioned`)                                                                                                                                                 |
+| `COOKIE_SECURE` / `TRUST_PROXY`             | `false` / `true` on Render                   |                                                                                                                                                                                                                          |
+| `LOG_LEVEL` / `LOG_PRETTY`                  | `info` / on in dev                           | pino                                                                                                                                                                                                                     |
+| `MONGOMS_SYSTEM_BINARY` / `MONGOMS_VERSION` | _(unset)_                                    | tests: use the installed `mongod` instead of downloading one                                                                                                                                                             |
 
-**Client** (`apps/client/.env`): `VITE_API_URL` (default `/api`), `DEV_API_PROXY_TARGET`
-(default: `http://127.0.0.1:<PORT from apps/server/.env>`).
+**Client:** no `.env`. The API address is the `API_BASE_URL` constant in
+`apps/client/src/lib/apiClient.ts`.
 
 ## First run and sign-in
 
@@ -271,7 +273,7 @@ app.whenReady().then(async () => {
 - `createApp()` / `startServer()` already take all settings from a config object, with no global
   state. `startServer` returns `{ url, port, close }`, and `PORT=0` picks a free port.
 - `CLIENT_DIST_DIR` makes Express serve the built client, so the UI and the API share one origin.
-  The client's default `VITE_API_URL=/api` then works unchanged, and the `SameSite=Strict` cookie
+  Set `API_BASE_URL` to `/api` for this build, set `COOKIE_SAMESITE=strict`, and the same-site cookie
   auth keeps working. No CORS is needed.
 - Multi-user roles stay as they are. On a single-seat install the first-run `/setup` creates
   the admin exactly as on the web.
