@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-gray-50 text-gray-900 antialiased;
+    /* The off-canvas drawer must never widen the page. `clip` (not `hidden`) keeps
+       position: sticky working because it does not create a scroll container. */
+    overflow-x: clip;
+    font-family: theme('fontFamily.sans');
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-600 ring-offset-2;
+  }
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm;
+  }
+  html {
+    background: white;
+  }
+}
+
+/* Stored rich text (prescription bodies): the few allowed tags, styled for screen and paper. */
+@layer components {
+  .rich-text p {
+    @apply my-1.5 leading-relaxed;
+  }
+  .rich-text h3 {
+    @apply mb-1 mt-3 text-base font-bold;
+  }
+  .rich-text h4 {
+    @apply mb-1 mt-2 text-sm font-bold;
+  }
+  .rich-text ul {
+    @apply my-1.5 list-disc ps-6;
+  }
+  .rich-text ol {
+    @apply my-1.5 list-decimal ps-6;
+  }
+}
+
+@media print {
+  html {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    background: white;
+  }
+}

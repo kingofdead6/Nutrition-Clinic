@@ -1,0 +1,33 @@
+{
+  "app": {
+    "name": "Cabinet de nutrition",
+    "tagline": "Votre santé ... l'équilibre de votre vie",
+    "quote": "Une alimentation saine est la base d'une vie saine"
+  },
+  "nav": {
+    "home": "Accueil",
+    "patients": "Patients",
+    "appointments": "Rendez-vous",
+    "dietPlans": "Plans alimentaires",
+    "prescriptions": "Ordonnances",
+    "reports": "Rapports",
+    "foods": "Aliments",
+    "settings": "Paramètres",
+    "backup": "Sauvegarde"
+  },
+  "errors": {
+    "backupInvalid": "Ce fichier n'est pas une sauvegarde valide",
+    "backupNewer": "Sauvegarde créée par une version plus récente. Mettez à jour l’application.",
+    "backupInvalidRecords": "La sauvegarde contient des enregistrements invalides ; rien n’a été modifié",
+    "backupNoAdmin": "La sauvegarde ne contient aucun administrateur actif",
+    "backupConfirm": "La restauration doit être confirmée",
+    "backupType": "Le fichier doit être au format ZIP",
+    "notFound": {
+      "backup": "Sauvegarde introuvable"
+    }
+  },
+  "backup": {
+    "title": "Sauvegarde",
+    "subtitle": "Sauvegardez et restaurez toutes les données du cabinet"
+  }
+}
