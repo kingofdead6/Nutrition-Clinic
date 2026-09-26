@@ -10,7 +10,8 @@ const booleanFromEnv = z
 
 const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
-  HOST: z.string().default('127.0.0.1'),
+  /** Default: 127.0.0.1 locally; 0.0.0.0 on hosting platforms (see defaultHost). */
+  HOST: z.string().optional(),
   /** 0 = pick a random free port (the desktop shell may do this as a fallback). */
   PORT: z.coerce.number().int().min(0).max(65535).default(4000),
 
@@ -56,6 +57,17 @@ const envSchema = z.object({
  * @param {Record<string, string | undefined>} [source]
  * @param {string} [baseDir]
  */
+/**
+ * Locally the API only listens on 127.0.0.1 (not reachable from the network). Hosting
+ * platforms route traffic to the container's public interface, so there it must be
+ * 0.0.0.0. Render sets RENDER=true; production builds are assumed to be hosted.
+ * @param {Record<string, string | undefined>} source
+ * @param {string} nodeEnv
+ */
+function defaultHost(source, nodeEnv) {
+  return source.RENDER || nodeEnv === 'production' ? '0.0.0.0' : '127.0.0.1';
+}
+
 export function loadConfig(source = process.env, baseDir = process.cwd()) {
   const parsed = envSchema.safeParse(source);
   if (!parsed.success) {
@@ -74,7 +86,7 @@ export function loadConfig(source = process.env, baseDir = process.cwd()) {
 
   return {
     env: e.NODE_ENV,
-    host: e.HOST,
+    host: e.HOST ?? defaultHost(source, e.NODE_ENV),
     port: e.PORT,
     db: {
       driver: e.DB_DRIVER,

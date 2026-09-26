@@ -42,21 +42,21 @@ npm run dev
 
 **Server** (`apps/server/.env`, see `.env.example`):
 
-| Variable                                    | Default                                      | Notes                                                                                                            |
-| ------------------------------------------- | -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `HOST` / `PORT`                             | `127.0.0.1` / `4000`                         | `PORT=0` picks a random free port                                                                                |
-| `DB_DRIVER`                                 | `mongo`                                      | `mongo` \| `sqlite` (sqlite: not implemented yet)                                                                |
-| `MONGO_URI`                                 | `mongodb://127.0.0.1:27017/nutrition_clinic` |                                                                                                                  |
-| `SQLITE_PATH`                               | `<DATA_DIR>/clinic.db`                       | future desktop driver                                                                                            |
-| `DATA_DIR`                                  | `./data`                                     | root for uploads, backups, local DB                                                                              |
-| `UPLOADS_DIR` / `BACKUP_DIR`                | `<DATA_DIR>/uploads` / `<DATA_DIR>/backups`  |                                                                                                                  |
-| `CLIENT_DIST_DIR`                           | _(unset)_                                    | serve the built client from the API server                                                                       |
-| `CORS_ORIGIN`                               | `http://localhost:5173`                      | comma-separated exact origins. `*` does not work with cookie auth (unused in dev: the Vite proxy is same-origin) |
-| `JWT_SECRET`                                | dev fallback                                 | **required in production** (≥ 32 chars)                                                                          |
-| `JWT_EXPIRES_IN_HOURS`                      | `168`                                        |                                                                                                                  |
-| `COOKIE_SECURE` / `TRUST_PROXY`             | `false`                                      |                                                                                                                  |
-| `LOG_LEVEL` / `LOG_PRETTY`                  | `info` / on in dev                           | pino                                                                                                             |
-| `MONGOMS_SYSTEM_BINARY` / `MONGOMS_VERSION` | _(unset)_                                    | tests: use the installed `mongod` instead of downloading one                                                     |
+| Variable                                    | Default                                      | Notes                                                                                                              |
+| ------------------------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `HOST` / `PORT`                             | `127.0.0.1` / `4000`                         | `HOST` becomes `0.0.0.0` on Render (`RENDER` set) or with `NODE_ENV=production`. `PORT=0` picks a random free port |
+| `DB_DRIVER`                                 | `mongo`                                      | `mongo` \| `sqlite` (sqlite: not implemented yet)                                                                  |
+| `MONGO_URI`                                 | `mongodb://127.0.0.1:27017/nutrition_clinic` |                                                                                                                    |
+| `SQLITE_PATH`                               | `<DATA_DIR>/clinic.db`                       | future desktop driver                                                                                              |
+| `DATA_DIR`                                  | `./data`                                     | root for uploads, backups, local DB                                                                                |
+| `UPLOADS_DIR` / `BACKUP_DIR`                | `<DATA_DIR>/uploads` / `<DATA_DIR>/backups`  |                                                                                                                    |
+| `CLIENT_DIST_DIR`                           | _(unset)_                                    | serve the built client from the API server                                                                         |
+| `CORS_ORIGIN`                               | `http://localhost:5173`                      | comma-separated exact origins. `*` does not work with cookie auth (unused in dev: the Vite proxy is same-origin)   |
+| `JWT_SECRET`                                | dev fallback                                 | **required in production** (≥ 32 chars)                                                                            |
+| `JWT_EXPIRES_IN_HOURS`                      | `168`                                        |                                                                                                                    |
+| `COOKIE_SECURE` / `TRUST_PROXY`             | `false`                                      |                                                                                                                    |
+| `LOG_LEVEL` / `LOG_PRETTY`                  | `info` / on in dev                           | pino                                                                                                               |
+| `MONGOMS_SYSTEM_BINARY` / `MONGOMS_VERSION` | _(unset)_                                    | tests: use the installed `mongod` instead of downloading one                                                       |
 
 **Client** (`apps/client/.env`): `VITE_API_URL` (default `/api`), `DEV_API_PROXY_TARGET`
 (default: `http://127.0.0.1:<PORT from apps/server/.env>`).
@@ -134,7 +134,7 @@ in [render.yaml](render.yaml). Use Render → New → Blueprint, or copy them in
 
 - `.npmrc` sets `include=dev`. The build tools (tsup, TypeScript, Vite) are devDependencies,
   and npm would otherwise skip them under `NODE_ENV=production`.
-- `HOST` must be `0.0.0.0`. The default `127.0.0.1` is only reachable from inside the machine.
+- The server listens on `0.0.0.0` automatically on Render (it sets `RENDER=true`). Elsewhere, set `HOST=0.0.0.0` or `NODE_ENV=production`.
 - Render's disk is temporary. Uploaded photos, the logo and server-side backups (`DATA_DIR`)
   are lost on every deploy unless you attach a persistent disk and point `DATA_DIR` at it.
   Download backups from the Backup page.

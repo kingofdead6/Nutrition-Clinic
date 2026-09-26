@@ -13,6 +13,12 @@ describe('loadConfig', () => {
     expect(c.host).toBe('127.0.0.1');
   });
 
+  it('listens on all interfaces when hosted, unless HOST is set', () => {
+    expect(loadConfig({ RENDER: 'true' }).host).toBe('0.0.0.0');
+    expect(loadConfig({ NODE_ENV: 'production', JWT_SECRET: 'x'.repeat(32) }).host).toBe('0.0.0.0');
+    expect(loadConfig({ RENDER: 'true', HOST: '127.0.0.1' }).host).toBe('127.0.0.1');
+  });
+
   it('parses CORS origins and booleans', () => {
     const c = loadConfig({ CORS_ORIGIN: 'http://a, http://b', COOKIE_SECURE: 'true', PORT: '0' });
     expect(c.cors.origins).toEqual(['http://a', 'http://b']);
